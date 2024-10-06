@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { User, Phone, Mail, ShoppingBag, Truck, MapPin, Calendar, Loader2 } from "lucide-react";
-import '../styles/ProfilePage.css';
+import {
+  User,
+  Phone,
+  Mail,
+  ShoppingBag,
+  Truck,
+  MapPin,
+  Calendar,
+  Loader2,
+} from "lucide-react";
+import "../styles/ProfilePage.css";
 
 interface UserProfile {
   _id: string;
@@ -43,7 +52,7 @@ const ProfilePage: React.FC = () => {
           `${import.meta.env.VITE_BACKEND_API}/api/getProfile`,
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
             },
           }
         );
@@ -62,101 +71,101 @@ const ProfilePage: React.FC = () => {
 
   // Styles
   const pageStyle: React.CSSProperties = {
-    maxWidth: '1200px',
-    margin: '0 auto',
-    padding: '40px 20px',
-    fontFamily: 'Arial, sans-serif',
-    color: '#333',
-    lineHeight: '1.6',
-    backgroundColor: '#f7fafc',
-    minHeight: '100vh',
+    maxWidth: "1200px",
+    margin: "0 auto",
+    padding: "40px 20px",
+    fontFamily: "Arial, sans-serif",
+    color: "#333",
+    lineHeight: "1.6",
+    backgroundColor: "#f7fafc",
+    minHeight: "100vh",
   };
 
   const headerStyle: React.CSSProperties = {
-    fontSize: '32px',
-    fontWeight: 'bold',
-    color: '#2d3748',
-    marginBottom: '30px',
-    textAlign: 'center',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    fontSize: "32px",
+    fontWeight: "bold",
+    color: "#2d3748",
+    marginBottom: "30px",
+    textAlign: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   };
 
   const sectionStyle: React.CSSProperties = {
-    backgroundColor: '#ffffff',
-    borderRadius: '12px',
-    padding: '30px',
-    marginBottom: '30px',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    backgroundColor: "#ffffff",
+    borderRadius: "12px",
+    padding: "30px",
+    marginBottom: "30px",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
   };
 
   const subHeaderStyle: React.CSSProperties = {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    color: '#2d3748',
-    marginBottom: '20px',
-    display: 'flex',
-    alignItems: 'center',
+    fontSize: "24px",
+    fontWeight: "bold",
+    color: "#2d3748",
+    marginBottom: "20px",
+    display: "flex",
+    alignItems: "center",
   };
 
   const profileItemStyle: React.CSSProperties = {
-    marginBottom: '15px',
-    fontSize: '16px',
-    display: 'flex',
-    alignItems: 'center',
+    marginBottom: "15px",
+    fontSize: "16px",
+    display: "flex",
+    alignItems: "center",
   };
 
   const labelStyle: React.CSSProperties = {
-    fontWeight: 'bold',
-    marginRight: '10px',
-    color: '#4a5568',
-    minWidth: '80px',
-    display: 'flex',
-    alignItems: 'center',
+    fontWeight: "bold",
+    marginRight: "10px",
+    color: "#4a5568",
+    minWidth: "80px",
+    display: "flex",
+    alignItems: "center",
   };
 
   const orderListStyle: React.CSSProperties = {
-    listStyleType: 'none',
+    listStyleType: "none",
     padding: 0,
   };
 
   const orderItemStyle: React.CSSProperties = {
-    backgroundColor: '#f8fafc',
-    borderRadius: '8px',
-    padding: '20px',
-    marginBottom: '20px',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
-    transition: 'all 0.3s ease',
+    backgroundColor: "#f8fafc",
+    borderRadius: "8px",
+    padding: "20px",
+    marginBottom: "20px",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+    transition: "all 0.3s ease",
   };
 
   const orderHeaderStyle: React.CSSProperties = {
-    fontSize: '18px',
-    fontWeight: 'bold',
-    color: '#2d3748',
-    marginBottom: '15px',
-    display: 'flex',
-    alignItems: 'center',
+    fontSize: "18px",
+    fontWeight: "bold",
+    color: "#2d3748",
+    marginBottom: "15px",
+    display: "flex",
+    alignItems: "center",
   };
 
   const orderDetailStyle: React.CSSProperties = {
-    marginBottom: '10px',
-    fontSize: '14px',
-    display: 'flex',
-    alignItems: 'center',
+    marginBottom: "10px",
+    fontSize: "14px",
+    display: "flex",
+    alignItems: "center",
   };
 
   const iconStyle: React.CSSProperties = {
-    marginRight: '10px',
-    color: '#4a5568',
+    marginRight: "10px",
+    color: "#4a5568",
   };
 
   const loaderContainerStyle: React.CSSProperties = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    backgroundColor: '#f7fafc',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    backgroundColor: "#f7fafc",
   };
 
   if (loading) {
@@ -173,7 +182,7 @@ const ProfilePage: React.FC = () => {
         <User size={32} style={iconStyle} />
         User Profile
       </h1>
-      
+
       <div style={sectionStyle}>
         <h2 style={subHeaderStyle}>
           <User size={24} style={iconStyle} />

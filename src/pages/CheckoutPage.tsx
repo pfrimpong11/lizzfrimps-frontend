@@ -2,8 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { usePaystackPayment } from "react-paystack";
-import { ShoppingBag, User, Phone, Mail, Truck, MapPin, Calendar, CreditCard } from "lucide-react";
-import '../styles/CheckoutPage.css'
+import {
+  ShoppingBag,
+  User,
+  Phone,
+  Mail,
+  Truck,
+  MapPin,
+  Calendar,
+  CreditCard,
+} from "lucide-react";
+import "../styles/CheckoutPage.css";
 
 interface Cake {
   _id: string;
@@ -38,11 +47,14 @@ const CheckoutPage: React.FC = () => {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get<CartResponse>(`${import.meta.env.VITE_BACKEND_API}/api/cart`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const response = await axios.get<CartResponse>(
+          `${import.meta.env.VITE_BACKEND_API}/api/cart`,
+          {
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+            },
+          }
+        );
         setCartItems(response.data.items);
         setTotalPrice(calculateTotalPrice(response.data.items));
       } catch (err) {
@@ -54,7 +66,10 @@ const CheckoutPage: React.FC = () => {
   }, []);
 
   const calculateTotalPrice = (items: CartItem[]): number => {
-    return items.reduce((total, item) => total + item.cakeId.price * item.quantity, 0);
+    return items.reduce(
+      (total, item) => total + item.cakeId.price * item.quantity,
+      0
+    );
   };
 
   const getMinDate = () => {
@@ -75,22 +90,26 @@ const CheckoutPage: React.FC = () => {
   const onSuccess = async (reference: any) => {
     console.log(reference);
     alert("Payment successful! Reference: " + reference.reference);
-  
+
     try {
-      await axios.post(`${import.meta.env.VITE_BACKEND_API}/api/order/save`, {
-        userId: localStorage.getItem("userId"),
-        cartItems,
-        totalPrice,
-        deliveryMethod,
-        location,
-        deliveryDate,
-        email,
-      }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_API}/api/order/save`,
+        {
+          userId: sessionStorage.getItem("userId"),
+          cartItems,
+          totalPrice,
+          deliveryMethod,
+          location,
+          deliveryDate,
+          email,
         },
-      });
-  
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        }
+      );
+
       alert("Order saved and confirmation email sent!");
       await clearCart();
       navigate("/OrderSuccessPage");
@@ -117,11 +136,14 @@ const CheckoutPage: React.FC = () => {
 
   const clearCart = async () => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BACKEND_API}/api/cart/delete`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_API}/api/cart/delete`,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        }
+      );
       setCartItems([]);
       setTotalPrice(0);
       alert("Cart cleared successfully!");
@@ -133,93 +155,94 @@ const CheckoutPage: React.FC = () => {
 
   // Styles
   const pageStyle: React.CSSProperties = {
-    maxWidth: '800px',
-    margin: '0 auto',
-    padding: '40px 20px',
-    fontFamily: 'Arial, sans-serif',
-    color: '#333',
-    backgroundColor: '#f7fafc',
-    borderRadius: '8px',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    maxWidth: "800px",
+    margin: "0 auto",
+    padding: "40px 20px",
+    fontFamily: "Arial, sans-serif",
+    color: "#333",
+    backgroundColor: "#f7fafc",
+    borderRadius: "8px",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
   };
 
   const headerStyle: React.CSSProperties = {
-    fontSize: '32px',
-    fontWeight: 'bold',
-    color: '#2d3748',
-    marginBottom: '30px',
-    textAlign: 'center',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    fontSize: "32px",
+    fontWeight: "bold",
+    color: "#2d3748",
+    marginBottom: "30px",
+    textAlign: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   };
 
   const formStyle: React.CSSProperties = {
-    display: 'grid',
-    gap: '20px',
+    display: "grid",
+    gap: "20px",
   };
 
   const inputGroupStyle: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
   };
 
   const labelStyle: React.CSSProperties = {
-    marginBottom: '5px',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    color: '#4a5568',
-    display: 'flex',
-    alignItems: 'center',
+    marginBottom: "5px",
+    fontSize: "16px",
+    fontWeight: "bold",
+    color: "#4a5568",
+    display: "flex",
+    alignItems: "center",
   };
 
   const inputStyle: React.CSSProperties = {
-    padding: '12px',
-    fontSize: '16px',
-    border: '1px solid #e2e8f0',
-    borderRadius: '4px',
-    backgroundColor: '#fff',
-    transition: 'border-color 0.3s',
+    padding: "12px",
+    fontSize: "16px",
+    border: "1px solid #e2e8f0",
+    borderRadius: "4px",
+    backgroundColor: "#fff",
+    transition: "border-color 0.3s",
   };
 
   const selectStyle: React.CSSProperties = {
     ...inputStyle,
-    appearance: 'none',
-    backgroundImage: 'url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234a5568%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'right 10px top 50%',
-    backgroundSize: '12px auto',
+    appearance: "none",
+    backgroundImage:
+      'url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234a5568%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")',
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "right 10px top 50%",
+    backgroundSize: "12px auto",
   };
 
   const totalPriceStyle: React.CSSProperties = {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    marginTop: '20px',
-    textAlign: 'right',
-    color: '#2d3748',
-    padding: '15px',
-    backgroundColor: '#edf2f7',
-    borderRadius: '4px',
+    fontSize: "24px",
+    fontWeight: "bold",
+    marginTop: "20px",
+    textAlign: "right",
+    color: "#2d3748",
+    padding: "15px",
+    backgroundColor: "#edf2f7",
+    borderRadius: "4px",
   };
 
   const buttonStyle: React.CSSProperties = {
-    backgroundColor: '#48bb78',
-    color: 'white',
-    border: 'none',
-    padding: '12px 24px',
-    fontSize: '18px',
-    fontWeight: 'bold',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
+    backgroundColor: "#48bb78",
+    color: "white",
+    border: "none",
+    padding: "12px 24px",
+    fontSize: "18px",
+    fontWeight: "bold",
+    borderRadius: "4px",
+    cursor: "pointer",
+    transition: "background-color 0.3s",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
   };
 
   const iconStyle: React.CSSProperties = {
-    marginRight: '10px',
+    marginRight: "10px",
   };
 
   return (
@@ -318,13 +341,19 @@ const CheckoutPage: React.FC = () => {
             className="checkout-input"
           />
         </div>
-        <h2 style={totalPriceStyle}>Total Price: GHS {totalPrice.toFixed(2)}</h2>
-        <button 
-          type="submit" 
+        <h2 style={totalPriceStyle}>
+          Total Price: GHS {totalPrice.toFixed(2)}
+        </h2>
+        <button
+          type="submit"
           style={buttonStyle}
           className="checkout-button"
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#38a169'}
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#48bb78'}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.backgroundColor = "#38a169")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.backgroundColor = "#48bb78")
+          }
         >
           <CreditCard size={24} style={iconStyle} />
           Pay Now

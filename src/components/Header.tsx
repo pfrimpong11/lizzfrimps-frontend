@@ -23,21 +23,26 @@ const Header: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     setIsLoggedIn(!!token); // Check if token exists
 
     if (token) {
-      fetchCartItemCount(); // Fetch cart item count if logged in
+      fetchCartItemCount();
+      const intervalId = setInterval(fetchCartItemCount, 1000);
+      return () => clearInterval(intervalId);
     }
   }, []);
 
   const fetchCartItemCount = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/cart`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_API}/api/cart`,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        }
+      );
       setCartItemCount(response.data.itemCount); // Set the number of cart items
     } catch (error) {
       console.error("Error fetching cart item count", error);
@@ -53,8 +58,8 @@ const Header: React.FC = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Clear token
-    localStorage.setItem("isLoggedIn", "false");
+    sessionStorage.removeItem("token"); // Clear token
+    sessionStorage.setItem("isLoggedIn", "false");
     setIsLoggedIn(false);
     navigate("/LogoutPage");
   };
@@ -160,7 +165,6 @@ const Header: React.FC = () => {
     display: isMobile ? "block" : "none",
   };
 
-
   return (
     <header style={headerStyle}>
       <div style={containerStyle}>
@@ -196,13 +200,15 @@ const Header: React.FC = () => {
               <>
                 <button
                   onClick={handleCartButton}
-                  style={{ ...secondaryButtonStyle, position: 'relative' }}
+                  style={{ ...secondaryButtonStyle, position: "relative" }}
                 >
                   <ShoppingCart size={20} />
-                  <span style={{ marginLeft: "5px" }}>Cart ({cartItemCount})</span>
+                  <span style={{ marginLeft: "5px" }}>
+                    Cart ({cartItemCount})
+                  </span>
                 </button>
                 <button
-                  onClick={() => (navigate("/ProfilePage"))}
+                  onClick={() => navigate("/ProfilePage")}
                   style={secondaryButtonStyle}
                 >
                   Account
@@ -263,9 +269,9 @@ const Header: React.FC = () => {
             >
               <ShoppingCart size={20} />
               <span style={{ marginLeft: "5px" }}>Cart ({cartItemCount})</span>
-              </button>
+            </button>
             <button
-              onClick={() => (navigate("/ProfilePage"))}
+              onClick={() => navigate("/ProfilePage")}
               style={{
                 ...secondaryButtonStyle,
                 marginTop: "1rem",

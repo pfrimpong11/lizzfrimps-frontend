@@ -24,7 +24,8 @@ const LoginPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}/api/login`,
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_API}/api/login`,
         {
           username: formData.username,
           password: formData.password,
@@ -33,9 +34,9 @@ const LoginPage: React.FC = () => {
 
       const { token } = response.data;
 
-      // Store token in localStorage
-      localStorage.setItem("token", token);
-      localStorage.setItem("isLoggedIn", "true"); // Set login status
+      // Store token in sessionStorage
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("isLoggedIn", "true"); // Set login status
 
       console.log("Login successful:", response.data);
       navigate("/");
