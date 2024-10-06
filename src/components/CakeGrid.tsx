@@ -1,55 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import CakeItem from "./CakeItem";
-import Cake1 from '../assets/images/chocolate-cake.png';
-import Cake2 from '../assets/images/strawberry-cake.png';
-import Cake3 from '../assets/images/vanilla-cake.png';
+import CakeFilter from "./CakeFilter";
 
 interface Cake {
-  id: number;
+  _id: string;
   name: string;
-  image: string;
+  category: string;
+  imageId: string;
   price: number;
 }
 
 const CakeGrid: React.FC = () => {
-  const cakes: Cake[] = [
-    {
-      id: 1,
-      name: "Chocolate Delight",
-      image: Cake1,
-      price: 39.99,
-    },
-    {
-      id: 2,
-      name: "Strawberry Dream",
-      image: Cake2,
-      price: 44.99,
-    },
-    {
-      id: 3,
-      name: "Vanilla Bliss",
-      image: Cake3,
-      price: 34.99,
-    },
-    {
-      id: 4,
-      name: "Red Velvet Charm",
-      image: Cake2,
-      price: 49.99,
-    },
-    {
-      id: 5,
-      name: "Lemon Zest Delight",
-      image: Cake3,
-      price: 37.99,
-    },
-    {
-      id: 6,
-      name: "Caramel Macchiato Cake",
-      image: Cake1,
-      price: 54.99,
-    },
-  ];
+  const [cakes, setCakes] = useState<Cake[]>([]);
+  const [filteredCakes, setFilteredCakes] = useState<Cake[]>([]);
+  const [selectedFilter, setSelectedFilter] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  useEffect(() => {
+    fetchCakes();
+  }, []);
+
+  useEffect(() => {
+    let filtered = cakes;
+
+    // Apply search filter
+    if (searchTerm) {
+      filtered = filtered.filter((cake) =>
+        cake.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Apply category filter
+    if (selectedFilter) {
+      filtered = filtered.filter((cake) =>
+        cake.category.toLowerCase().includes(selectedFilter.toLowerCase())
+      );
+    }
+
+    setFilteredCakes(filtered);
+  }, [selectedFilter, searchTerm, cakes]);
+
+  const fetchCakes = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/cakes`);
+      setCakes(response.data);
+    } catch (error) {
+      console.error("Error fetching cakes", error);
+    }
+  };
+
+  const handleFilterChange = (filter: string) => {
+    setSelectedFilter(filter);
+  };
+
+  const handleSearchChange = (searchTerm: string) => {
+    setSearchTerm(searchTerm);
+  };
 
   const gridStyle: React.CSSProperties = {
     display: "grid",
@@ -60,10 +67,13 @@ const CakeGrid: React.FC = () => {
   };
 
   return (
-    <div style={gridStyle}>
-      {cakes.map((cake) => (
-        <CakeItem key={cake.id} cake={cake} />
-      ))}
+    <div>
+      <CakeFilter onFilterChange={handleFilterChange} onSearchChange={handleSearchChange} />
+      <div style={gridStyle}>
+        {filteredCakes.map((cake) => (
+          <CakeItem key={cake._id} cake={cake} />
+        ))}
+      </div>
     </div>
   );
 };

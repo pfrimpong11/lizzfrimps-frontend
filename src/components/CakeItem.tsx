@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface Cake {
-  id: number;
+  _id: string;
   name: string;
-  image: string;
+  category: string;
   price: number;
+  imageId: string;
 }
 
 interface CakeItemProps {
@@ -12,6 +13,9 @@ interface CakeItemProps {
 }
 
 const CakeItem: React.FC<CakeItemProps> = ({ cake }) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const itemStyle: React.CSSProperties = {
     backgroundColor: "white",
     borderRadius: "8px",
@@ -36,6 +40,12 @@ const CakeItem: React.FC<CakeItemProps> = ({ cake }) => {
     marginBottom: "0.5rem",
   };
 
+  const categoryStyle: React.CSSProperties = {
+    fontSize: "1rem",
+    color: "#757575",
+    marginBottom: "0.5rem",
+  };
+
   const priceStyle: React.CSSProperties = {
     fontSize: "1.1rem",
     color: "#e91e63",
@@ -54,6 +64,39 @@ const CakeItem: React.FC<CakeItemProps> = ({ cake }) => {
     transition: "background-color 0.3s ease",
   };
 
+  // Function to handle adding to cart
+  const handleAddToCart = async () => {
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_API}/api/cart/add`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming you have a token for authentication
+        },
+        body: JSON.stringify({
+          cakeId: cake._id,
+          quantity: 1, // Adjust the quantity as needed
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add to cart");
+      }
+
+      // Handle success (you may want to update a cart context or show a success message)
+      alert("Item added to cart successfully!");
+
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      setError("Please login to add to cart");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div
       style={itemStyle}
@@ -64,21 +107,29 @@ const CakeItem: React.FC<CakeItemProps> = ({ cake }) => {
         e.currentTarget.style.transform = "scale(1)";
       }}
     >
-      <img src={cake.image} alt={cake.name} style={imageStyle} />
+      <img
+        src={`${import.meta.env.VITE_BACKEND_API}/api/cakes/image/${cake.imageId}`}
+        alt={cake.name}
+        style={imageStyle}
+      />
       <div style={contentStyle}>
         <h3 style={nameStyle}>{cake.name}</h3>
+        <p style={categoryStyle}>{cake.category}</p>
         <p style={priceStyle}>${cake.price.toFixed(2)}</p>
         <button
           style={buttonStyle}
+          onClick={handleAddToCart}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = "#45a049";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.backgroundColor = "#4CAF50";
           }}
+          disabled={loading} // Disable button while loading
         >
-          Add to Cart
+          {loading ? "Adding..." : "Add to Cart"}
         </button>
+        {error && <p style={{ color: "red" }}>{error}</p>} {/* Display error message */}
       </div>
     </div>
   );

@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import Logo from "../assets/images/logo.png";
 import { Menu, X, ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [cartItemCount, setCartItemCount] = useState<number>(0);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -24,7 +25,24 @@ const Header: React.FC = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token); // Check if token exists
+
+    if (token) {
+      fetchCartItemCount(); // Fetch cart item count if logged in
+    }
   }, []);
+
+  const fetchCartItemCount = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/cart`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      setCartItemCount(response.data.itemCount); // Set the number of cart items
+    } catch (error) {
+      console.error("Error fetching cart item count", error);
+    }
+  };
 
   const handleSignUpButton = () => {
     navigate("/RegisterPage");
@@ -42,7 +60,7 @@ const Header: React.FC = () => {
   };
 
   const handleCartButton = () => {
-    navigate("/");
+    navigate("/CartPage");
   };
 
   const headerStyle: React.CSSProperties = {
@@ -142,6 +160,7 @@ const Header: React.FC = () => {
     display: isMobile ? "block" : "none",
   };
 
+
   return (
     <header style={headerStyle}>
       <div style={containerStyle}>
@@ -180,7 +199,7 @@ const Header: React.FC = () => {
                   style={{ ...secondaryButtonStyle, position: 'relative' }}
                 >
                   <ShoppingCart size={20} />
-                  <span style={{ marginLeft: '5px' }}>Cart</span>
+                  <span style={{ marginLeft: "5px" }}>Cart ({cartItemCount})</span>
                 </button>
                 <button
                   onClick={() => (navigate("/"))}
@@ -243,8 +262,8 @@ const Header: React.FC = () => {
               }}
             >
               <ShoppingCart size={20} />
-              <span style={{ marginLeft: '5px' }}>Cart</span>
-            </button>
+              <span style={{ marginLeft: "5px" }}>Cart ({cartItemCount})</span>
+              </button>
             <button
               onClick={() => (navigate("/"))}
               style={{

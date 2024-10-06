@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
 import CakeHeader from "../components/CakeHeader";
-import CakeFilter from "../components/CakeFilter";
 import CakeGrid from "../components/CakeGrid";
 import Pagination from "../components/Pagination";
 import "../styles/CakePage.css";
@@ -18,7 +17,6 @@ const CakePage: React.FC = () => {
       <Header />
       <CakeHeader />
       <main style={pageStyle}>
-        <CakeFilter />
         <CakeGrid />
         <Pagination />
         <br />

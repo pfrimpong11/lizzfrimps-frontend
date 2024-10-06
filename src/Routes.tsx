@@ -16,6 +16,8 @@ import CookiePolicyPage from "./pages/CookiePolicyPage";
 import OurStoryPage from "./pages/OurStoryPage";
 import CareersPage from "./pages/CareersPage";
 import AnnouncementsPage from "./pages/AnnouncementsPage";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 
 import AdminUploadPage from "./pages/AdminUploadPage";
@@ -29,7 +31,7 @@ import EditCake from "./pages/EditCake";
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
-      {/* <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/RegisterPage" element={<RegisterPage />} />
       <Route path="/LoginPage" element={<LoginPage />} />
       <Route path="/ForgotPasswordPage" element={<ForgotPasswordPage/>} />
@@ -44,14 +46,17 @@ const AppRoutes: React.FC = () => {
       <Route path="/CookiePolicyPage" element={<CookiePolicyPage />} />
       <Route path="/OurStoryPage" element={<OurStoryPage />} />
       <Route path="/CareersPage" element={<CareersPage />} />
-      <Route path="/AnnouncementsPage" element={<AnnouncementsPage />} /> */}
+      <Route path="/AnnouncementsPage" element={<AnnouncementsPage />} />
+      <Route path="/CartPage" element={<CartPage />} />
+      <Route path="/CheckoutPage" element={<CheckoutPage />} />
 
 
 
-      <Route path="/" element={<AdminUploadPage/>} />
+
+      {/* <Route path="/" element={<AdminUploadPage/>} />
       <Route path="/AdminDeletePage" element={<AdminDeletePage/>} />
       <Route path="/AdminViewPage" element={<AdminViewPage/>} />
-      <Route path="/EditCake" element={<EditCake/>} />
+      <Route path="/EditCake" element={<EditCake/>} /> */}
     </Routes>
   );
 };
