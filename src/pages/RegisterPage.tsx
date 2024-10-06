@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     name: "",
@@ -65,7 +68,7 @@ const RegisterPage: React.FC = () => {
       });
   
       console.log("Registration successful:", response.data.msg);
-      window.location.href = "/LoginPage";
+      navigate("/LoginPage");
     } catch (error: any) {
       if (error.response && error.response.data && error.response.data.msg) {
         setErrorMessage(error.response.data.msg);

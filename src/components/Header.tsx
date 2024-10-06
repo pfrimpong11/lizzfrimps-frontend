@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../assets/images/logo.png";
 import { Menu, X, ShoppingCart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,22 +27,22 @@ const Header: React.FC = () => {
   }, []);
 
   const handleSignUpButton = () => {
-    window.location.href = "/RegisterPage";
+    navigate("/RegisterPage");
   };
 
   const handleLoginButton = () => {
-    window.location.href = "/LoginPage";
+    navigate("/LoginPage");
   };
 
   const handleLogout = () => {
     localStorage.removeItem("token"); // Clear token
     localStorage.setItem("isLoggedIn", "false");
     setIsLoggedIn(false);
-    window.location.href = "/";
+    navigate("/LogoutPage");
   };
 
   const handleCartButton = () => {
-    window.location.href = "/";
+    navigate("/");
   };
 
   const headerStyle: React.CSSProperties = {
@@ -161,10 +164,10 @@ const Header: React.FC = () => {
             <a href="/supplies" style={navLinkStyle}>
               Supplies
             </a>
-            <a href="/about" style={navLinkStyle}>
+            <a href="/AboutPage" style={navLinkStyle}>
               About
             </a>
-            <a href="/contact" style={navLinkStyle}>
+            <a href="/ContactPage" style={navLinkStyle}>
               Contact
             </a>
           </nav>
@@ -180,7 +183,7 @@ const Header: React.FC = () => {
                   <span style={{ marginLeft: '5px' }}>Cart</span>
                 </button>
                 <button
-                  onClick={() => (window.location.href = "/")}
+                  onClick={() => (navigate("/"))}
                   style={secondaryButtonStyle}
                 >
                   Account
@@ -222,10 +225,10 @@ const Header: React.FC = () => {
         <a href="/supplies" style={navLinkStyle}>
           Supplies
         </a>
-        <a href="/about" style={navLinkStyle}>
+        <a href="/AboutPage" style={navLinkStyle}>
           About
         </a>
-        <a href="/contact" style={navLinkStyle}>
+        <a href="/ContactPage" style={navLinkStyle}>
           Contact
         </a>
         {/* Conditional Rendering for mobile menu based on login status */}
@@ -243,7 +246,7 @@ const Header: React.FC = () => {
               <span style={{ marginLeft: '5px' }}>Cart</span>
             </button>
             <button
-              onClick={() => (window.location.href = "/")}
+              onClick={() => (navigate("/"))}
               style={{
                 ...secondaryButtonStyle,
                 marginTop: "1rem",

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -21,8 +24,7 @@ const LoginPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_API}/api/login`,
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}/api/login`,
         {
           username: formData.username,
           password: formData.password,
@@ -36,7 +38,7 @@ const LoginPage: React.FC = () => {
       localStorage.setItem("isLoggedIn", "true"); // Set login status
 
       console.log("Login successful:", response.data);
-      window.location.href = "/";
+      navigate("/");
     } catch (error: any) {
       if (error.response && error.response.data && error.response.data.msg) {
         setErrorMessage(error.response.data.msg);

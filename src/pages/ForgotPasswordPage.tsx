@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPasswordPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
   });
@@ -38,7 +41,7 @@ const ForgotPasswordPage: React.FC = () => {
   
       console.log("Reset email sent.", response.data.msg);
       setTimeout(() => {
-          window.location.href = "/LoginPage";
+          navigate("/LoginPage");
     }, 3000);
     } catch (error: any) {
       if (error.response && error.response.data && error.response.data.msg) {
