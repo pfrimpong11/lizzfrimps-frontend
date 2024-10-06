@@ -202,7 +202,7 @@ const Header: React.FC = () => {
                   <span style={{ marginLeft: "5px" }}>Cart ({cartItemCount})</span>
                 </button>
                 <button
-                  onClick={() => (navigate("/"))}
+                  onClick={() => (navigate("/ProfilePage"))}
                   style={secondaryButtonStyle}
                 >
                   Account
@@ -265,7 +265,7 @@ const Header: React.FC = () => {
               <span style={{ marginLeft: "5px" }}>Cart ({cartItemCount})</span>
               </button>
             <button
-              onClick={() => (navigate("/"))}
+              onClick={() => (navigate("/ProfilePage"))}
               style={{
                 ...secondaryButtonStyle,
                 marginTop: "1rem",

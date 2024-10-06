@@ -1,0 +1,49 @@
+.checkout-container {
+  transition: all 0.3s ease;
+}
+
+.checkout-input,
+.checkout-select {
+  transition: border-color 0.3s ease;
+}
+
+.checkout-input:focus,
+.checkout-select:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+.checkout-button {
+  transition: all 0.3s ease;
+}
+
+.checkout-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .checkout-container {
+    padding: 20px 15px !important;
+  }
+
+  .checkout-container h1 {
+    font-size: 24px !important;
+  }
+
+  .checkout-input,
+  .checkout-select {
+    font-size: 14px !important;
+    padding: 10px !important;
+  }
+
+  .checkout-container h2 {
+    font-size: 20px !important;
+  }
+
+  .checkout-button {
+    font-size: 16px !important;
+    padding: 10px 20px !important;
+  }
+}

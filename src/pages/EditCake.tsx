@@ -82,7 +82,7 @@ const EditCake: React.FC = () => {
           <li key={cake._id}>
             <img src={`${import.meta.env.VITE_BACKEND_API}/api/cakes/image/${cake.imageId}`} alt={cake.name} style={{ width: '100px', height: '100px' }} /> {/* Display the cake image */}
             <div>
-              <strong>{cake.name}</strong> - {cake.category} - ${cake.price}
+              <strong>{cake.name}</strong> - {cake.category} - GHS {cake.price}
               <button onClick={() => handleEditClick(cake)}>Edit</button>
             </div>
           </li>

@@ -47,7 +47,7 @@ const AdminDeletePage: React.FC = () => {
               <img src={`${import.meta.env.VITE_BACKEND_API}/api/cakes/image/${cake.imageId}`} alt={cake.name} width="100" height="100" />
               <h3>{cake.name}</h3>
               <p>Category: {cake.category}</p>
-              <p>Price: ${cake.price}</p>
+              <p>Price: GHS {cake.price}</p>
               <button onClick={() => handleDelete(cake._id)}>Delete</button>
             </li>
           ))}

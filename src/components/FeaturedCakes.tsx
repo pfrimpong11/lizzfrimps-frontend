@@ -5,9 +5,9 @@ import VanillaCake from '../assets/images/vanilla-cake.png';
 
 const FeaturedCakes: React.FC = () => {
   const cakes = [
-    { name: "Chocolate Delight", image: ChocolateCake, price: "$39.99" },
-    { name: "Strawberry Dream", image: StrawberryCake, price: "$44.99" },
-    { name: "Vanilla Bliss", image: VanillaCake, price: "$34.99" },
+    { name: "Chocolate Delight", image: ChocolateCake, price: "GHS 39.99" },
+    { name: "Strawberry Dream", image: StrawberryCake, price: "GHS 44.99" },
+    { name: "Vanilla Bliss", image: VanillaCake, price: "GHS 34.99" },
   ];
 
   const sectionStyle: React.CSSProperties = {

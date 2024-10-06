@@ -115,7 +115,7 @@ const CakeItem: React.FC<CakeItemProps> = ({ cake }) => {
       <div style={contentStyle}>
         <h3 style={nameStyle}>{cake.name}</h3>
         <p style={categoryStyle}>{cake.category}</p>
-        <p style={priceStyle}>${cake.price.toFixed(2)}</p>
+        <p style={priceStyle}>GHS {cake.price.toFixed(2)}</p>
         <button
           style={buttonStyle}
           onClick={handleAddToCart}

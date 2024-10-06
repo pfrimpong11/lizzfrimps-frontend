@@ -39,7 +39,7 @@ const AdminViewPage: React.FC = () => {
                 <p>{cake.imageId}</p>
               <h3>{cake.name}</h3>
               <p>Category: {cake.category}</p>
-              <p>Price: ${cake.price}</p>
+              <p>Price: GHS {cake.price}</p>
             </li>
           ))}
         </ul>

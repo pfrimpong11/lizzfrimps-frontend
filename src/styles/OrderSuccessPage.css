@@ -1,0 +1,31 @@
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .order-success-content {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  @media (max-width: 768px) {
+    .order-success-content {
+      padding: 30px !important;
+    }
+  
+    .order-success-header {
+      font-size: 24px !important;
+    }
+  
+    .order-success-paragraph {
+      font-size: 16px !important;
+    }
+  
+    .order-success-button-container {
+      flex-direction: column !important;
+    }
+  
+    .order-success-button {
+      width: 100% !important;
+      margin-bottom: 10px !important;
+    }
+  }
