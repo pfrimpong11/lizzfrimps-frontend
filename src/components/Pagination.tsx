@@ -1,6 +1,15 @@
 import React from "react";
 
-const Pagination: React.FC = () => {
+interface PaginationProps {
+  totalItems: number;
+  itemsPerPage: number;
+  currentPage: number;
+  onPageChange: (pageNumber: number) => void;
+}
+
+const Pagination: React.FC<PaginationProps> = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
   const paginationStyle: React.CSSProperties = {
     display: "flex",
     justifyContent: "center",
@@ -20,18 +29,40 @@ const Pagination: React.FC = () => {
 
   const activeStyle: React.CSSProperties = {
     ...buttonStyle,
-    backgroundColor: "#007bff",
+    backgroundColor: "#db6e14",
     color: "white",
-    borderColor: "#007bff",
+    borderColor: "#823f08",
+  };
+
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(
+        <button
+          key={i}
+          style={i === currentPage ? activeStyle : buttonStyle}
+          onClick={() => onPageChange(i)}
+        >
+          {i}
+        </button>
+      );
+    }
+    return pageNumbers;
   };
 
   return (
     <div style={paginationStyle}>
-      <button style={buttonStyle}>&laquo; Previous</button>
-      <button style={activeStyle}>1</button>
-      <button style={buttonStyle}>2</button>
-      <button style={buttonStyle}>3</button>
-      <button style={buttonStyle}>Next &raquo;</button>
+      <button style={buttonStyle} onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
+        &laquo; Previous
+      </button>
+      {renderPageNumbers()}
+      <button
+        style={buttonStyle}
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+      >
+        Next &raquo;
+      </button>
     </div>
   );
 };

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Mail } from "lucide-react";
+import logo from '../assets/images/logo.png';
+import backgroundImage from '../assets/images/background.png';
 
 const ForgotPasswordPage: React.FC = () => {
   const navigate = useNavigate();
@@ -10,6 +13,7 @@ const ForgotPasswordPage: React.FC = () => {
   });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -39,15 +43,16 @@ const ForgotPasswordPage: React.FC = () => {
         email: formData.email,
       });
   
+      setSuccessMessage("Reset email sent. Please check your inbox.");
       console.log("Reset email sent.", response.data.msg);
       setTimeout(() => {
-          navigate("/LoginPage");
-    }, 3000);
+        navigate("/LoginPage");
+      }, 3000);
     } catch (error: any) {
       if (error.response && error.response.data && error.response.data.msg) {
         setErrorMessage(error.response.data.msg);
       } else {
-        setErrorMessage("Failed to sent password reset email. Please try again.");
+        setErrorMessage("Failed to send password reset email. Please try again.");
       }
       console.error("There was an error sending the reset email:", error);
     }
@@ -58,17 +63,26 @@ const ForgotPasswordPage: React.FC = () => {
     justifyContent: "center",
     alignItems: "center",
     minHeight: "100vh",
-    backgroundColor: "#f7f8fc",
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
     padding: "20px",
   };
 
   const formContainerStyle: React.CSSProperties = {
-    backgroundColor: "#ffffff",
-    borderRadius: "10px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    borderRadius: "15px",
+    boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
     padding: "40px",
     width: "100%",
-    maxWidth: "500px",
+    maxWidth: "400px",
+    backdropFilter: "blur(10px)",
+  };
+
+  const logoStyle: React.CSSProperties = {
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: "20px",
   };
 
   const titleStyle: React.CSSProperties = {
@@ -88,6 +102,7 @@ const ForgotPasswordPage: React.FC = () => {
   const inputContainerStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
+    position: "relative",
   };
 
   const labelStyle: React.CSSProperties = {
@@ -98,11 +113,18 @@ const ForgotPasswordPage: React.FC = () => {
   };
 
   const inputStyle: React.CSSProperties = {
-    padding: "12px",
+    padding: "12px 40px",
     fontSize: "16px",
     border: "1px solid #ddd",
-    borderRadius: "5px",
-    transition: "border-color 0.3s ease",
+    borderRadius: "8px",
+    transition: "border-color 0.3s ease, box-shadow 0.3s ease",
+  };
+
+  const iconStyle: React.CSSProperties = {
+    position: "absolute",
+    left: "12px",
+    top: "38px",
+    color: "#888",
   };
 
   const buttonStyle: React.CSSProperties = {
@@ -110,16 +132,42 @@ const ForgotPasswordPage: React.FC = () => {
     fontSize: "18px",
     fontWeight: "bold",
     color: "#fff",
-    backgroundColor: "#4CAF50",
+    backgroundColor: "#ED8936",
     border: "none",
-    borderRadius: "5px",
+    borderRadius: "8px",
     cursor: "pointer",
-    transition: "background-color 0.3s ease",
+    transition: "background-color 0.3s ease, transform 0.1s ease",
+  };
+
+  const messageStyle: React.CSSProperties = {
+    fontSize: "14px",
+    marginTop: "10px",
+    textAlign: "center",
+  };
+
+  const errorStyle: React.CSSProperties = {
+    ...messageStyle,
+    color: "#E53E3E",
+  };
+
+  const successStyle: React.CSSProperties = {
+    ...messageStyle,
+    color: "#38A169",
+  };
+
+  const linkStyle: React.CSSProperties = {
+    color: "#ED8936",
+    textDecoration: "none",
+    fontWeight: "bold",
+    transition: "color 0.3s ease",
   };
 
   return (
-    <div style={pageStyle}>
+    <div style={pageStyle} className="forgot-password-container">
       <div style={formContainerStyle}>
+        <div style={logoStyle}>
+          <img src={logo} alt="Lizzfrimps Cakes Logo" width="100" height="60" />
+        </div>
         <h1 style={titleStyle}>Forgot Password</h1>
         <form onSubmit={handleSubmit} style={formStyle}>
           <div style={inputContainerStyle}>
@@ -133,25 +181,34 @@ const ForgotPasswordPage: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
               style={inputStyle}
+              className="forgot-password-input"
             />
+            <Mail size={20} style={iconStyle} />
           </div>
-          {/* Display error message */}
-          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+          {errorMessage && <p style={errorStyle}>{errorMessage}</p>}
+          {successMessage && <p style={successStyle}>{successMessage}</p>}
           <button
             type="submit"
             style={buttonStyle}
+            className="forgot-password-button"
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#45a049";
+              e.currentTarget.style.backgroundColor = "#DD6B20";
+              e.currentTarget.style.transform = "translateY(-2px)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#4CAF50";
+              e.currentTarget.style.backgroundColor = "#ED8936";
+              e.currentTarget.style.transform = "translateY(0)";
             }}
           >
             Send Reset Link
           </button>
         </form>
-        <p>Remembered your password? <a href="/LoginPage">Sign in</a></p>
-        <p>Don't have an account? <a href="/RegisterPage">Register</a></p>
+        <p style={{ textAlign: "center", marginTop: "20px" }}>
+          Remembered your password? <a href="/LoginPage" style={linkStyle} className="forgot-password-link">Sign in</a>
+        </p>
+        <p style={{ textAlign: "center", marginTop: "10px" }}>
+          Don't have an account? <a href="/RegisterPage" style={linkStyle} className="forgot-password-link">Register</a>
+        </p>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import BackNavigator from '../components/BackNavigator';
 
 const AnnouncementsPage: React.FC = () => {
   const pageStyle: React.CSSProperties = {
@@ -149,6 +150,7 @@ const AnnouncementsPage: React.FC = () => {
 
   return (
     <div style={pageStyle}>
+      <BackNavigator label="Go Back" />
       <header style={headerStyle}>
         <h1 style={titleStyle}>Announcements</h1>
         <p style={subtitleStyle}>Stay up to date with the latest news from Lizzfrimps Cakes Empire</p>
@@ -197,7 +199,7 @@ const AnnouncementsPage: React.FC = () => {
         </p>
         <p style={announcementContentStyle}>
           Email: press@lizzfrimpscakes.com<br />
-          Phone: (555) 123-4567
+          Phone: +233 (054) 664-0201
         </p>
       </section>
     </div>

@@ -184,7 +184,7 @@ const Header: React.FC = () => {
             <a href="/CakePage" style={navLinkStyle}>
               Cakes
             </a>
-            <a href="/supplies" style={navLinkStyle}>
+            <a href="/" style={navLinkStyle}>
               Supplies
             </a>
             <a href="/AboutPage" style={navLinkStyle}>
@@ -247,7 +247,7 @@ const Header: React.FC = () => {
         <a href="/CakePage" style={navLinkStyle}>
           Cakes
         </a>
-        <a href="/supplies" style={navLinkStyle}>
+        <a href="/" style={navLinkStyle}>
           Supplies
         </a>
         <a href="/AboutPage" style={navLinkStyle}>

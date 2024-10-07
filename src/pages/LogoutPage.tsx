@@ -44,7 +44,7 @@ const LogoutPage: React.FC = () => {
     fontSize: "18px",
     fontWeight: "bold",
     color: "#ffffff",
-    backgroundColor: "#4CAF50",
+    backgroundColor: "#ED8936",
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
@@ -69,10 +69,10 @@ const LogoutPage: React.FC = () => {
           style={buttonStyle}
           onClick={handleHomeClick}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = "#45a049";
+            e.currentTarget.style.backgroundColor = "#db6e14";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = "#4CAF50";
+            e.currentTarget.style.backgroundColor = "#ED8936";
           }}
         >
           Return to Homepage

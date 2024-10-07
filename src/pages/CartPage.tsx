@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ShoppingCart, Trash2, CreditCard, Loader2 } from "lucide-react";
+import BackNavigator from "../components/BackNavigator";
 import "../styles/CartPage.css";
 
 interface Cake {
@@ -79,9 +80,9 @@ const CartPage: React.FC = () => {
 
   // Styles
   const pageStyle: React.CSSProperties = {
-    maxWidth: "1200px",
+    // maxWidth: "1200px",
     margin: "0 auto",
-    padding: "40px 20px",
+    padding: "80px 30px",
     fontFamily: "Arial, sans-serif",
     color: "#333",
     backgroundColor: "#f7f7f7",
@@ -117,6 +118,7 @@ const CartPage: React.FC = () => {
 
   const cartItemStyle: React.CSSProperties = {
     display: "flex",
+    // flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
     padding: "20px",
@@ -124,6 +126,11 @@ const CartPage: React.FC = () => {
     borderRadius: "8px",
     marginBottom: "15px",
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+  };
+
+  const imageContainerStyle: React.CSSProperties = {
+    display: "flex",
+    justifyContent: "space-between",
   };
 
   const imageStyle: React.CSSProperties = {
@@ -176,7 +183,7 @@ const CartPage: React.FC = () => {
   };
 
   const checkoutButtonStyle: React.CSSProperties = {
-    backgroundColor: "#48BB78",
+    backgroundColor: "#ED8936",
     color: "white",
     border: "none",
     padding: "12px 24px",
@@ -212,6 +219,7 @@ const CartPage: React.FC = () => {
 
   return (
     <div style={pageStyle}>
+      <BackNavigator label="Go Back" />
       <h1 style={headerStyle}>
         <ShoppingCart size={32} className="mr-2" />
         Your Cart
@@ -221,19 +229,21 @@ const CartPage: React.FC = () => {
       ) : (
         <ul style={cartListStyle}>
           {cartItems.map((item) => (
-            <li key={item._id} style={cartItemStyle}>
-              <img
-                src={`${import.meta.env.VITE_BACKEND_API}/api/cakes/image/${
-                  item.cakeId.imageId
-                }`}
-                alt={item.cakeId.name}
-                style={imageStyle}
-              />
-              <div style={itemDetailsStyle}>
-                <div style={itemNameStyle}>{item.cakeId.name}</div>
-                <div style={itemPriceStyle}>
-                  Quantity: {item.quantity} - Price: GHS{" "}
-                  {(item.cakeId.price * item.quantity).toFixed(2)}
+            <li key={item._id} style={cartItemStyle} className="cartItemStyle">
+              <div style={imageContainerStyle}>
+                <img
+                  src={`${import.meta.env.VITE_BACKEND_API}/api/cakes/image/${
+                    item.cakeId.imageId
+                  }`}
+                  alt={item.cakeId.name}
+                  style={imageStyle}
+                />
+                <div style={itemDetailsStyle}>
+                  <div style={itemNameStyle}>{item.cakeId.name}</div>
+                  <div style={itemPriceStyle}>
+                    Quantity: {item.quantity} - Price: GHS{" "}
+                    {(item.cakeId.price * item.quantity).toFixed(2)}
+                  </div>
                 </div>
               </div>
               <button
@@ -258,14 +268,27 @@ const CartPage: React.FC = () => {
         onClick={() => navigate("/CheckoutPage")}
         style={checkoutButtonStyle}
         onMouseEnter={(e) =>
-          (e.currentTarget.style.backgroundColor = "#38A169")
+          (e.currentTarget.style.backgroundColor = "#db6e14")
         }
         onMouseLeave={(e) =>
-          (e.currentTarget.style.backgroundColor = "#48BB78")
+          (e.currentTarget.style.backgroundColor = "#ED8936")
         }
       >
         <CreditCard size={20} className="mr-2" />
         Checkout
+      </button>
+      <button
+        onClick={() => navigate("/")}
+        style={checkoutButtonStyle}
+        onMouseEnter={(e) =>
+          (e.currentTarget.style.backgroundColor = "#db6e14")
+        }
+        onMouseLeave={(e) =>
+          (e.currentTarget.style.backgroundColor = "#ED8936")
+        }
+      >
+        <ShoppingCart size={20} className="mr-2" />
+        Continue Shopping
       </button>
     </div>
   );

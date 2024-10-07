@@ -1,4 +1,6 @@
 import React from 'react';
+import ShopImage from '../assets/images/shop.jpeg';
+import BackNavigator from '../components/BackNavigator';
 
 const AboutPage: React.FC = () => {
   const pageStyle: React.CSSProperties = {
@@ -44,7 +46,7 @@ const AboutPage: React.FC = () => {
   };
 
   const imageStyle: React.CSSProperties = {
-    width: '100%',
+    width: '20%',
     maxWidth: '600px',
     height: 'auto',
     borderRadius: '8px',
@@ -84,6 +86,7 @@ const AboutPage: React.FC = () => {
 
   return (
     <div style={pageStyle}>
+      <BackNavigator label="Go Back" />
       <header style={headerStyle}>
         <h1 style={titleStyle}>About Lizzfrimps Cakes Empire</h1>
         <p style={subtitleStyle}>Crafting Sweet Memories Since 2010</p>
@@ -91,9 +94,9 @@ const AboutPage: React.FC = () => {
 
       <section style={sectionStyle}>
         <h2 style={sectionTitleStyle}>Our Story</h2>
-        <img src="/placeholder.svg?height=400&width=600" alt="Lizzfrimps Cakes Shop" style={imageStyle} />
+        <img src={ShopImage} alt="Lizzfrimps Cakes Shop" style={imageStyle} />
         <p style={paragraphStyle}>
-          Lizzfrimps Cakes Empire was born out of a passion for creating delightful, mouthwatering cakes that bring joy to every occasion. Founded by Elizabeth "Lizzy" Frimps in 2010, our journey began in a small kitchen with big dreams. Today, we've grown into a beloved local institution, known for our exquisite designs and unforgettable flavors.
+          Lizzfrimps Cakes Empire was born out of a passion for creating delightful, mouthwatering cakes that bring joy to every occasion. Founded by Elizabeth "Lizzy" Frimpong in 2010, our journey began in a small kitchen with big dreams. Today, we've grown into a beloved local institution, known for our exquisite designs and unforgettable flavors.
         </p>
         <p style={paragraphStyle}>
           Our commitment to quality ingredients, innovative recipes, and stunning designs has made us the go-to choice for birthdays, weddings, and special events throughout the community. We take pride in being a part of your most cherished moments and strive to make each cake a masterpiece of flavor and artistry.
@@ -107,7 +110,7 @@ const AboutPage: React.FC = () => {
         </p>
       </section>
 
-      <section style={sectionStyle}>
+      {/* <section style={sectionStyle}>
         <h2 style={sectionTitleStyle}>Meet Our Team</h2>
         <div style={teamContainerStyle}>
           <div style={teamMemberStyle}>
@@ -126,7 +129,7 @@ const AboutPage: React.FC = () => {
             <p style={teamMemberRoleStyle}>Customer Experience Manager</p>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section style={sectionStyle}>
         <h2 style={sectionTitleStyle}>Visit Us</h2>
@@ -134,9 +137,9 @@ const AboutPage: React.FC = () => {
           We'd love to welcome you to our cake shop! Come visit us to see our latest creations, discuss your custom cake ideas, or simply enjoy a slice of heaven with a cup of coffee.
         </p>
         <p style={paragraphStyle}>
-          <strong>Address:</strong> 123 Cake Street, Sweetville, CA 90210<br />
+          <strong>Address:</strong> 7th Adote Obour st<br />
           <strong>Hours:</strong> Monday - Saturday: 9:00 AM - 6:00 PM<br />
-          <strong>Phone:</strong> (555) 123-4567<br />
+          <strong>Phone:</strong> +233 (054) 664-0201<br />
           <strong>Email:</strong> info@lizzfrimpscakes.com
         </p>
       </section>

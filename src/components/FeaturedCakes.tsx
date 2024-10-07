@@ -1,114 +1,125 @@
 import React from 'react';
+import { Star, ChevronRight } from 'lucide-react';
 import ChocolateCake from '../assets/images/chocolate-cake.png';
 import StrawberryCake from '../assets/images/strawberry-cake.png';
 import VanillaCake from '../assets/images/vanilla-cake.png';
 
+
+interface Product {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  rating: number;
+}
+
 const FeaturedCakes: React.FC = () => {
-  const cakes = [
-    { name: "Chocolate Delight", image: ChocolateCake, price: "GHS 39.99" },
-    { name: "Strawberry Dream", image: StrawberryCake, price: "GHS 44.99" },
-    { name: "Vanilla Bliss", image: VanillaCake, price: "GHS 34.99" },
+  const products: Product[] = [
+    { id: '1', name: 'Chocolate Delight', image: ChocolateCake, price: 39.99, rating: 4.8 },
+    { id: '2', name: 'Strawberry Dream', image: StrawberryCake, price: 34.99, rating: 4.7 },
+    { id: '3', name: 'Vanilla Bliss', image: VanillaCake, price: 29.99, rating: 4.9 },
+    { id: '4', name: 'Red Velvet Magic', image: StrawberryCake, price: 44.99, rating: 4.6 },
   ];
 
   const sectionStyle: React.CSSProperties = {
-    margin: '3rem 0',
-    padding: '0 1rem',
+    padding: '4rem 1rem',
+    backgroundColor: '#F7FAFC',
   };
 
-  const headingStyle: React.CSSProperties = {
-    fontSize: '2rem',
-    fontWeight: 'bold',
-    marginBottom: '1.5rem',
-    textAlign: 'center',
-    color: '#333',
-  };
-
-  const gridStyle: React.CSSProperties = {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-    gap: "30px",
+  const containerStyle: React.CSSProperties = {
+    maxWidth: '1200px',
     margin: '0 auto',
   };
 
-  const cardStyle: React.CSSProperties = {
-    backgroundColor: '#fff',
+  const headerStyle: React.CSSProperties = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '2rem',
+  };
+
+  const titleStyle: React.CSSProperties = {
+    fontSize: '2.25rem',
+    fontWeight: 'bold',
+    color: '#2D3748',
+  };
+
+  const viewAllStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    color: '#4A5568',
+    fontSize: '1rem',
+    textDecoration: 'none',
+    transition: 'color 0.3s ease',
+  };
+
+  const gridStyle: React.CSSProperties = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '2rem',
+  };
+
+  const productStyle: React.CSSProperties = {
+    backgroundColor: '#FFFFFF',
     borderRadius: '0.5rem',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     overflow: 'hidden',
-    transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
   };
 
   const imageStyle: React.CSSProperties = {
     width: '100%',
-    height: '300px',
+    height: '200px',
     objectFit: 'cover',
   };
 
-  const contentStyle: React.CSSProperties = {
-    padding: '1.5rem',
+  const productInfoStyle: React.CSSProperties = {
+    padding: '1rem',
   };
 
-  const cakeNameStyle: React.CSSProperties = {
+  const productNameStyle: React.CSSProperties = {
     fontSize: '1.25rem',
-    fontWeight: '600',
+    fontWeight: 'bold',
     marginBottom: '0.5rem',
-    color: '#333',
+    color: '#2D3748',
   };
 
-  const priceStyle: React.CSSProperties = {
+  const productPriceStyle: React.CSSProperties = {
     fontSize: '1.125rem',
-    color: '#666',
-    marginBottom: '1rem',
+    color: '#4A5568',
+    marginBottom: '0.5rem',
   };
 
-  const buttonStyle: React.CSSProperties = {
-    width: '100%',
-    padding: '0.75rem',
-    backgroundColor: '#4A5568',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '0.25rem',
-    fontSize: '1rem',
-    fontWeight: '500',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
+  const ratingStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    color: '#ED8936',
   };
 
   return (
     <section style={sectionStyle}>
-      <h2 style={headingStyle}>Featured Cakes</h2>
-      <div style={gridStyle} className="featured-cakes-grid">
-        {cakes.map((cake) => (
-          <div
-            key={cake.name}
-            style={cardStyle}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-5px)';
-              e.currentTarget.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-            }}
-          >
-            <img src={cake.image} alt={cake.name} style={imageStyle} />
-            <div style={contentStyle}>
-              <h3 style={cakeNameStyle}>{cake.name}</h3>
-              <p style={priceStyle}>{cake.price}</p>
-              <button
-                style={buttonStyle}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#2D3748';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#4A5568';
-                }}
-              >
-                Add to Cart
-              </button>
+      <div style={containerStyle}>
+        <header style={headerStyle}>
+          <h2 style={titleStyle}>Featured Products</h2>
+          <a href="/CakePage" style={viewAllStyle} className="view-all-link">
+            View All <ChevronRight size={20} style={{ marginLeft: '0.5rem' }} />
+          </a>
+        </header>
+        <div style={gridStyle} className="featured-products-grid">
+          {products.map((product) => (
+            <div key={product.id} style={productStyle} className="product-card">
+              <img src={product.image} alt={product.name} style={imageStyle} />
+              <div style={productInfoStyle}>
+                <h3 style={productNameStyle}>{product.name}</h3>
+                <p style={productPriceStyle}>GHS {product.price.toFixed(2)}</p>
+                <div style={ratingStyle}>
+                  <Star size={16} fill="#ED8936" />
+                  <span style={{ marginLeft: '0.25rem' }}>{product.rating.toFixed(1)}</span>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

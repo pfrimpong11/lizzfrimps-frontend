@@ -1,4 +1,5 @@
 import React from 'react';
+import BackNavigator from '../components/BackNavigator';
 
 const CookiePolicyPage: React.FC = () => {
   const pageStyle: React.CSSProperties = {
@@ -73,6 +74,7 @@ const CookiePolicyPage: React.FC = () => {
 
   return (
     <div style={pageStyle}>
+      <BackNavigator label="Go Back" />
       <header style={headerStyle}>
         <h1 style={titleStyle}>Cookie Policy</h1>
         <p style={lastUpdatedStyle}>Last updated: May 10, 2024</p>
@@ -154,9 +156,9 @@ const CookiePolicyPage: React.FC = () => {
         </p>
         <p style={paragraphStyle}>
           Lizzfrimps Cakes Empire<br />
-          123 Cake Street, Sweetville, CA 90210<br />
+          7th Adote Obour st<br />
           Email: privacy@lizzfrimpscakes.com<br />
-          Phone: (555) 123-4567
+          Phone: +233 (054) 664-0201
         </p>
       </section>
     </div>

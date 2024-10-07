@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import BackNavigator from '../components/BackNavigator';
 
 interface FAQItem {
   question: string;
@@ -90,6 +91,7 @@ const FAQsPage: React.FC = () => {
 
   return (
     <div style={pageStyle}>
+      <BackNavigator label="Go Back" />
       <header style={headerStyle}>
         <h1 style={titleStyle}>Frequently Asked Questions</h1>
         <p style={subtitleStyle}>Find answers to common questions about our cakes and services</p>

@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import BackNavigator from '../components/BackNavigator';
 
 const ContactPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,11 +21,25 @@ const ContactPage: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Here you would typically send the data to your backend
-  };
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_BACKEND_API}/api/submit-feedback`, formData,
+          {
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+            },
+          }
+        );
+
+        console.log(response.data);
+        navigate("/");
+      } catch (error: any) {
+        console.error("There was an error: ", error);
+      }
+    };
+
 
   const pageStyle: React.CSSProperties = {
     maxWidth: '1200px',
@@ -78,7 +97,7 @@ const ContactPage: React.FC = () => {
   };
 
   const buttonStyle: React.CSSProperties = {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#ED8936',
     color: 'white',
     padding: '12px 20px',
     border: 'none',
@@ -112,6 +131,7 @@ const ContactPage: React.FC = () => {
 
   return (
     <div style={pageStyle}>
+      <BackNavigator label="Go Back" />
       <header style={headerStyle}>
         <h1 style={titleStyle}>Contact Us</h1>
         <p style={subtitleStyle}>We'd love to hear from you!</p>
@@ -125,7 +145,7 @@ const ContactPage: React.FC = () => {
             placeholder="Your Name"
             value={formData.name}
             onChange={handleChange}
-            required
+            
             style={inputStyle}
           />
           <input
@@ -134,7 +154,7 @@ const ContactPage: React.FC = () => {
             placeholder="Your Email"
             value={formData.email}
             onChange={handleChange}
-            required
+            
             style={inputStyle}
           />
           <input
@@ -143,7 +163,7 @@ const ContactPage: React.FC = () => {
             placeholder="Subject"
             value={formData.subject}
             onChange={handleChange}
-            required
+            
             style={inputStyle}
           />
           <textarea
@@ -151,17 +171,17 @@ const ContactPage: React.FC = () => {
             placeholder="Your Message"
             value={formData.message}
             onChange={handleChange}
-            required
+            
             style={textareaStyle}
           />
           <button 
             type="submit" 
             style={buttonStyle}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#45a049';
+              e.currentTarget.style.backgroundColor = '#ED8936';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#4CAF50';
+              e.currentTarget.style.backgroundColor = '#ED8936';
             }}
           >
             Send Message
@@ -171,7 +191,7 @@ const ContactPage: React.FC = () => {
         <div style={infoStyle}>
           <div style={infoItemStyle}>
             <h2 style={infoTitleStyle}>Visit Our Shop</h2>
-            <p>123 Cake Street, Sweetville, CA 90210</p>
+            <p>7th Adote Obour st</p>
           </div>
           <div style={infoItemStyle}>
             <h2 style={infoTitleStyle}>Opening Hours</h2>
@@ -180,13 +200,13 @@ const ContactPage: React.FC = () => {
           </div>
           <div style={infoItemStyle}>
             <h2 style={infoTitleStyle}>Contact Information</h2>
-            <p>Phone: (555) 123-4567</p>
+            <p>Phone: +233 (054) 664-0201</p>
             <p>Email: info@lizzfrimpscakes.com</p>
           </div>
           <div style={infoItemStyle}>
             <h2 style={infoTitleStyle}>Find Us</h2>
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.7152203498337!2d-118.24368384896661!3d34.05267002569861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c64f0f4a2e37%3A0x5db0e6f5bbd4efbd!2sLos%20Angeles%2C%20CA%2090012!5e0!3m2!1sen!2sus!4v1620764146261!5m2!1sen!2sus" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d692.1232079724059!2d-0.2566995849033322!3d5.54328369509514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x102083c236a06e61%3A0x9524453358c387d1!2sLizzfrimps%20Cakes%20Empire%20Gh!5e1!3m2!1sen!2sgh!4v1728313365770!5m2!1sen!2sgh" 
               style={mapStyle} 
               allowFullScreen 
               loading="lazy"

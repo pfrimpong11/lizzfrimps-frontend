@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  User,
-  Phone,
-  Mail,
-  ShoppingBag,
-  Truck,
-  MapPin,
-  Calendar,
-  Loader2,
-} from "lucide-react";
+import { User, Phone, Mail, ShoppingBag, Truck, MapPin, Calendar, Loader2 } from "lucide-react";
+import BackNavigator from "../components/BackNavigator";
 import "../styles/ProfilePage.css";
 
 interface UserProfile {
@@ -22,6 +14,7 @@ interface UserProfile {
 
 interface Order {
   _id: string;
+  orderId: string;
   totalPrice: number;
   deliveryMethod: string;
   location: string;
@@ -71,9 +64,9 @@ const ProfilePage: React.FC = () => {
 
   // Styles
   const pageStyle: React.CSSProperties = {
-    maxWidth: "1200px",
+    // maxWidth: "1200px",
     margin: "0 auto",
-    padding: "40px 20px",
+    padding: "40px 30px",
     fontFamily: "Arial, sans-serif",
     color: "#333",
     lineHeight: "1.6",
@@ -178,6 +171,7 @@ const ProfilePage: React.FC = () => {
 
   return (
     <div style={pageStyle}>
+      <BackNavigator label="Go Back" />
       <h1 style={headerStyle}>
         <User size={32} style={iconStyle} />
         User Profile
@@ -235,7 +229,7 @@ const ProfilePage: React.FC = () => {
               <li key={order._id} style={orderItemStyle}>
                 <h3 style={orderHeaderStyle}>
                   <ShoppingBag size={18} style={iconStyle} />
-                  Order ID: {order._id}
+                  Order ID: {order.orderId}
                 </h3>
                 <p style={orderDetailStyle}>
                   <span style={labelStyle}>

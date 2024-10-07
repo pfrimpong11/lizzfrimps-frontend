@@ -1,8 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
-import CakeHeader from "../components/CakeHeader";
 import CakeGrid from "../components/CakeGrid";
-import Pagination from "../components/Pagination";
 import "../styles/CakePage.css";
 
 const CakePage: React.FC = () => {
@@ -15,10 +13,8 @@ const CakePage: React.FC = () => {
   return (
     <div>
       <Header />
-      <CakeHeader />
       <main style={pageStyle}>
         <CakeGrid />
-        <Pagination />
         <br />
       </main>
     </div>

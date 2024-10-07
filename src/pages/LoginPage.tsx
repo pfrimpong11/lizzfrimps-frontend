@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { User, Lock, Eye, EyeOff } from "lucide-react";
+import logo from '../assets/images/logo.png';
+import backgroundImage from '../assets/images/background.png';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -11,6 +14,7 @@ const LoginPage: React.FC = () => {
   });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -34,9 +38,8 @@ const LoginPage: React.FC = () => {
 
       const { token } = response.data;
 
-      // Store token in sessionStorage
       sessionStorage.setItem("token", token);
-      sessionStorage.setItem("isLoggedIn", "true"); // Set login status
+      sessionStorage.setItem("isLoggedIn", "true");
 
       console.log("Login successful:", response.data);
       navigate("/");
@@ -44,9 +47,9 @@ const LoginPage: React.FC = () => {
       if (error.response && error.response.data && error.response.data.msg) {
         setErrorMessage(error.response.data.msg);
       } else {
-        setErrorMessage("Registration failed. Please try again.");
+        setErrorMessage("Login failed. Please try again.");
       }
-      console.error("There was an error registering the user:", error);
+      console.error("There was an error logging in:", error);
     }
   };
 
@@ -55,17 +58,26 @@ const LoginPage: React.FC = () => {
     justifyContent: "center",
     alignItems: "center",
     minHeight: "100vh",
-    backgroundColor: "#f7f8fc",
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
     padding: "20px",
   };
 
   const formContainerStyle: React.CSSProperties = {
-    backgroundColor: "#ffffff",
-    borderRadius: "10px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    borderRadius: "15px",
+    boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
     padding: "40px",
     width: "100%",
-    maxWidth: "500px",
+    maxWidth: "400px",
+    backdropFilter: "blur(10px)",
+  };
+
+  const logoStyle: React.CSSProperties = {
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: "20px",
   };
 
   const titleStyle: React.CSSProperties = {
@@ -85,6 +97,7 @@ const LoginPage: React.FC = () => {
   const inputContainerStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
+    position: "relative",
   };
 
   const labelStyle: React.CSSProperties = {
@@ -95,11 +108,18 @@ const LoginPage: React.FC = () => {
   };
 
   const inputStyle: React.CSSProperties = {
-    padding: "12px",
+    padding: "12px 40px",
     fontSize: "16px",
     border: "1px solid #ddd",
-    borderRadius: "5px",
-    transition: "border-color 0.3s ease",
+    borderRadius: "8px",
+    transition: "border-color 0.3s ease, box-shadow 0.3s ease",
+  };
+
+  const iconStyle: React.CSSProperties = {
+    position: "absolute",
+    left: "12px",
+    top: "38px",
+    color: "#888",
   };
 
   const buttonStyle: React.CSSProperties = {
@@ -107,17 +127,34 @@ const LoginPage: React.FC = () => {
     fontSize: "18px",
     fontWeight: "bold",
     color: "#fff",
-    backgroundColor: "#4CAF50",
+    backgroundColor: "#ED8936",
     border: "none",
-    borderRadius: "5px",
+    borderRadius: "8px",
     cursor: "pointer",
-    transition: "background-color 0.3s ease",
+    transition: "background-color 0.3s ease, transform 0.1s ease",
+  };
+
+  const errorStyle: React.CSSProperties = {
+    color: "#E53E3E",
+    fontSize: "14px",
+    marginTop: "10px",
+    textAlign: "center",
+  };
+
+  const linkStyle: React.CSSProperties = {
+    color: "#ED8936",
+    textDecoration: "none",
+    fontWeight: "bold",
+    transition: "color 0.3s ease",
   };
 
   return (
-    <div style={pageStyle}>
+    <div style={pageStyle} className="login-container">
       <div style={formContainerStyle}>
-        <h1 style={titleStyle}>Login</h1>
+        <div style={logoStyle}>
+          <img src={logo} alt="Lizzfrimps Cakes Logo" width="100" height="60" />
+        </div>
+        <h1 style={titleStyle}>Login to Lizzfrimps Cakes</h1>
         <form onSubmit={handleSubmit} style={formStyle}>
           <div style={inputContainerStyle}>
             <label htmlFor="username" style={labelStyle}>
@@ -130,40 +167,66 @@ const LoginPage: React.FC = () => {
               value={formData.username}
               onChange={handleChange}
               style={inputStyle}
+              className="login-input"
             />
+            <User size={20} style={iconStyle} />
           </div>
           <div style={inputContainerStyle}>
             <label htmlFor="password" style={labelStyle}>
               Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               style={inputStyle}
+              className="login-input"
             />
+            <Lock size={20} style={iconStyle} />
+            {showPassword ? (
+              <EyeOff
+                size={20}
+                style={{ ...iconStyle, left: "auto", right: "12px", cursor: "pointer" }}
+                onClick={() => setShowPassword(false)}
+              />
+            ) : (
+              <Eye
+                size={20}
+                style={{ ...iconStyle, left: "auto", right: "12px", cursor: "pointer" }}
+                onClick={() => setShowPassword(true)}
+              />
+            )}
           </div>
-          {/* Display error message */}
-          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+          {errorMessage && <p style={errorStyle}>{errorMessage}</p>}
           <button
             type="submit"
             style={buttonStyle}
+            className="login-button"
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#45a049";
+              e.currentTarget.style.backgroundColor = "#DD6B20";
+              e.currentTarget.style.transform = "translateY(-2px)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#4CAF50";
+              e.currentTarget.style.backgroundColor = "#ED8936";
+              e.currentTarget.style.transform = "translateY(0)";
             }}
           >
             Login
           </button>
-          <a href="/ForgotPasswordPage">Forgot Password?</a>
-          <p>
-            Don't have an account? <a href="/RegisterPage">Register</a>
-          </p>
         </form>
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+          <a href="/ForgotPasswordPage" style={linkStyle} className="login-link">
+            Forgot Password?
+          </a>
+        </div>
+        <p style={{ textAlign: "center", marginTop: "20px" }}>
+          Don't have an account?{" "}
+          <a href="/RegisterPage" style={linkStyle} className="login-link">
+            Register
+          </a>
+        </p>
       </div>
     </div>
   );

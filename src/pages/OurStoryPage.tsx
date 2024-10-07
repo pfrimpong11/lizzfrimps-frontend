@@ -1,4 +1,6 @@
 import React from 'react';
+import Founder from '../assets/images/founder.png';
+import BackNavigator from '../components/BackNavigator';
 
 const OurStoryPage: React.FC = () => {
   const pageStyle: React.CSSProperties = {
@@ -44,7 +46,7 @@ const OurStoryPage: React.FC = () => {
   };
 
   const imageStyle: React.CSSProperties = {
-    width: '100%',
+    width: '30%',
     maxWidth: '600px',
     height: 'auto',
     borderRadius: '8px',
@@ -85,16 +87,17 @@ const OurStoryPage: React.FC = () => {
 
   return (
     <div style={pageStyle}>
+      <BackNavigator label="Go Back" />
       <header style={headerStyle}>
         <h1 style={titleStyle}>Our Story</h1>
         <p style={subtitleStyle}>The sweet journey of Lizzfrimps Cakes Empire</p>
       </header>
 
       <section style={sectionStyle}>
-        <img src="/placeholder.svg?height=400&width=600" alt="Lizzfrimps Cakes Founder" style={imageStyle} />
+        <img src={Founder} alt="Lizzfrimps Cakes Founder" style={imageStyle} />
         <h2 style={sectionTitleStyle}>A Passion for Baking</h2>
         <p style={paragraphStyle}>
-          Lizzfrimps Cakes Empire was born out of a lifelong passion for baking and a dream to spread joy through delicious, beautifully crafted cakes. Our founder, Elizabeth "Lizzy" Frimps, started her journey in her grandmother's kitchen, where she learned the secrets of traditional cake recipes and the art of baking with love.
+          Lizzfrimps Cakes Empire was born out of a lifelong passion for baking and a dream to spread joy through delicious, beautifully crafted cakes. Our founder, Elizabeth "Lizzy" Frimpong, started her journey in her kitchen, where she learned the secrets of traditional cake recipes and the art of baking with love.
         </p>
         <p style={paragraphStyle}>
           What began as a hobby soon turned into a calling. Lizzy's cakes became the talk of the town, with friends and family constantly requesting her creations for their special occasions. It was then that she realized her passion could become something more – a way to bring smiles to people's faces and make their celebrations truly unforgettable.
@@ -102,7 +105,7 @@ const OurStoryPage: React.FC = () => {
       </section>
 
       <div style={quoteStyle}>
-        "Baking isn't just about mixing ingredients; it's about creating moments of joy and bringing people together." - Elizabeth Frimps
+        "Baking isn't just about mixing ingredients; it's about creating moments of joy and bringing people together." - Elizabeth Frimpong
       </div>
 
       <section style={sectionStyle}>

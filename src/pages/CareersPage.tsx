@@ -1,4 +1,5 @@
 import React from 'react';
+import BackNavigator from '../components/BackNavigator';
 
 const CareersPage: React.FC = () => {
   const pageStyle: React.CSSProperties = {
@@ -72,7 +73,7 @@ const CareersPage: React.FC = () => {
   };
 
   const buttonStyle: React.CSSProperties = {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#ED8936',
     color: 'white',
     border: 'none',
     padding: '10px 15px',
@@ -95,7 +96,7 @@ const CareersPage: React.FC = () => {
   };
 
   const checkmarkStyle: React.CSSProperties = {
-    color: '#4CAF50',
+    color: '#ED8936',
     marginRight: '10px',
   };
 
@@ -119,6 +120,7 @@ const CareersPage: React.FC = () => {
 
   return (
     <div style={pageStyle}>
+      <BackNavigator label="Go Back" />
       <header style={headerStyle}>
         <h1 style={titleStyle}>Careers at Lizzfrimps Cakes Empire</h1>
         <p style={subtitleStyle}>Join our team and help us create sweet memories!</p>

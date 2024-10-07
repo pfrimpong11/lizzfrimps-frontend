@@ -8,14 +8,14 @@ import Footer from "../components/Footer";
 
 const HomePage: React.FC = () => {
   return (
-    <>
+    <div style={{ backgroundColor: '#F7FAFC' }}>
       <Header />
       <HeroBanner />
       <QuickLinks />
       <FeaturedCakes />
       <Testimonials />
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -20,6 +20,7 @@ import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import ProfilePage from "./pages/ProfilePage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
+import CategoryCakePage from "./pages/CategoryCakePage";
 
 
 import AdminUploadPage from "./pages/AdminUploadPage";
@@ -53,6 +54,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/CheckoutPage" element={<CheckoutPage />} />
       <Route path="/ProfilePage" element={<ProfilePage />} />
       <Route path="/OrderSuccessPage" element={<OrderSuccessPage />} />
+      <Route path="/:category" element={<CategoryCakePage />} />
 
 
       {/* <Route path="/" element={<AdminUploadPage/>} />

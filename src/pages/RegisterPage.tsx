@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { User, Mail, Phone, Lock, Eye, EyeOff } from "lucide-react";
+import logo from '../assets/images/logo.png';
+import backgroundImage from '../assets/images/background.png';
 
 const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
@@ -15,6 +18,8 @@ const RegisterPage: React.FC = () => {
   });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -33,26 +38,22 @@ const RegisterPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   
-     // Check if all fields are filled
     const { username, name, email, phoneNumber, password, confirmPassword } = formData;
     if (!username || !name || !email || !phoneNumber || !password || !confirmPassword) {
       setErrorMessage("Please fill in all fields.");
       return;
     }
 
-    // Validate email format
     if (!validateEmail(email)) {
       setErrorMessage("Please enter a valid email address.");
       return;
     }
 
-    // Check if password is at least 8 characters long
     if (password.length < 8) {
       setErrorMessage("Password must be at least 8 characters long.");
       return;
     }
 
-    // Check if passwords match
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match!");
       return;
@@ -84,17 +85,26 @@ const RegisterPage: React.FC = () => {
     justifyContent: "center",
     alignItems: "center",
     minHeight: "100vh",
-    backgroundColor: "#f7f8fc",
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
     padding: "20px",
   };
 
   const formContainerStyle: React.CSSProperties = {
-    backgroundColor: "#ffffff",
-    borderRadius: "10px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    borderRadius: "15px",
+    boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
     padding: "40px",
     width: "100%",
     maxWidth: "500px",
+    backdropFilter: "blur(10px)",
+  };
+
+  const logoStyle: React.CSSProperties = {
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: "20px",
   };
 
   const titleStyle: React.CSSProperties = {
@@ -114,6 +124,7 @@ const RegisterPage: React.FC = () => {
   const inputContainerStyle: React.CSSProperties = {
     display: "flex",
     flexDirection: "column",
+    position: "relative",
   };
 
   const labelStyle: React.CSSProperties = {
@@ -124,11 +135,18 @@ const RegisterPage: React.FC = () => {
   };
 
   const inputStyle: React.CSSProperties = {
-    padding: "12px",
+    padding: "12px 40px",
     fontSize: "16px",
     border: "1px solid #ddd",
-    borderRadius: "5px",
-    transition: "border-color 0.3s ease",
+    borderRadius: "8px",
+    transition: "border-color 0.3s ease, box-shadow 0.3s ease",
+  };
+
+  const iconStyle: React.CSSProperties = {
+    position: "absolute",
+    left: "12px",
+    top: "38px",
+    color: "#888",
   };
 
   const buttonStyle: React.CSSProperties = {
@@ -136,16 +154,33 @@ const RegisterPage: React.FC = () => {
     fontSize: "18px",
     fontWeight: "bold",
     color: "#fff",
-    backgroundColor: "#4CAF50",
+    backgroundColor: "#ED8936",
     border: "none",
-    borderRadius: "5px",
+    borderRadius: "8px",
     cursor: "pointer",
-    transition: "background-color 0.3s ease",
+    transition: "background-color 0.3s ease, transform 0.1s ease",
+  };
+
+  const errorStyle: React.CSSProperties = {
+    color: "#E53E3E",
+    fontSize: "14px",
+    marginTop: "10px",
+    textAlign: "center",
+  };
+
+  const linkStyle: React.CSSProperties = {
+    color: "#ED8936",
+    textDecoration: "none",
+    fontWeight: "bold",
+    transition: "color 0.3s ease",
   };
 
   return (
-    <div style={pageStyle}>
+    <div style={pageStyle} className="register-container">
       <div style={formContainerStyle}>
+        <div style={logoStyle}>
+          <img src={logo} alt="Lizzfrimps Cakes Logo" width="100" height="60" />
+        </div>
         <h1 style={titleStyle}>Sign Up for Lizzfrimps Cakes</h1>
         <form onSubmit={handleSubmit} style={formStyle}>
           <div style={inputContainerStyle}>
@@ -159,7 +194,9 @@ const RegisterPage: React.FC = () => {
               value={formData.username}
               onChange={handleChange}
               style={inputStyle}
+              className="register-input"
             />
+            <User size={20} style={iconStyle} />
           </div>
           <div style={inputContainerStyle}>
             <label htmlFor="name" style={labelStyle}>
@@ -172,7 +209,9 @@ const RegisterPage: React.FC = () => {
               value={formData.name}
               onChange={handleChange}
               style={inputStyle}
+              className="register-input"
             />
+            <User size={20} style={iconStyle} />
           </div>
           <div style={inputContainerStyle}>
             <label htmlFor="email" style={labelStyle}>
@@ -185,7 +224,9 @@ const RegisterPage: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
               style={inputStyle}
+              className="register-input"
             />
+            <Mail size={20} style={iconStyle} />
           </div>
           <div style={inputContainerStyle}>
             <label htmlFor="phoneNumber" style={labelStyle}>
@@ -198,50 +239,86 @@ const RegisterPage: React.FC = () => {
               value={formData.phoneNumber}
               onChange={handleChange}
               style={inputStyle}
+              className="register-input"
             />
+            <Phone size={20} style={iconStyle} />
           </div>
           <div style={inputContainerStyle}>
             <label htmlFor="password" style={labelStyle}>
               Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               style={inputStyle}
+              className="register-input"
             />
+            <Lock size={20} style={iconStyle} />
+            {showPassword ? (
+              <EyeOff
+                size={20}
+                style={{ ...iconStyle, left: "auto", right: "12px", cursor: "pointer" }}
+                onClick={() => setShowPassword(false)}
+              />
+            ) : (
+              <Eye
+                size={20}
+                style={{ ...iconStyle, left: "auto", right: "12px", cursor: "pointer" }}
+                onClick={() => setShowPassword(true)}
+              />
+            )}
           </div>
           <div style={inputContainerStyle}>
             <label htmlFor="confirmPassword" style={labelStyle}>
               Confirm Password
             </label>
             <input
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
               id="confirmPassword"
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
               style={inputStyle}
+              className="register-input"
             />
+            <Lock size={20} style={iconStyle} />
+            {showConfirmPassword ? (
+              <EyeOff
+                size={20}
+                style={{ ...iconStyle, left: "auto", right: "12px", cursor: "pointer" }}
+                onClick={() => setShowConfirmPassword(false)}
+              />
+            ) : (
+              <Eye
+                size={20}
+                style={{ ...iconStyle, left: "auto", right: "12px", cursor: "pointer" }}
+                onClick={() => setShowConfirmPassword(true)}
+              />
+            )}
           </div>
-          {/* Display error message */}
-          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+          {errorMessage && <p style={errorStyle}>{errorMessage}</p>}
           <button
             type="submit"
             style={buttonStyle}
+            className="register-button"
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#45a049";
+              e.currentTarget.style.backgroundColor = "#DD6B20";
+              e.currentTarget.style.transform = "translateY(-2px)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#4CAF50";
+              e.currentTarget.style.backgroundColor = "#ED8936";
+              e.currentTarget.style.transform = "translateY(0)";
             }}
           >
             Register
           </button>
         </form>
-        <p>Already have an account? <a href="/LoginPage">Sign in</a></p>
+        <p style={{ textAlign: "center", marginTop: "20px" }}>
+          Already have an account? <a href="/LoginPage" style={linkStyle} className="register-link">Sign in</a>
+        </p>
       </div>
     </div>
   );

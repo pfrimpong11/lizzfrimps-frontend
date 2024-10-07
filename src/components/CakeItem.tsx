@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ShoppingCart, Loader } from "lucide-react";
+import { ShoppingCart, Loader, X } from "lucide-react";
 
 interface Cake {
   _id: string;
@@ -16,6 +16,7 @@ interface CakeItemProps {
 const CakeItem: React.FC<CakeItemProps> = ({ cake }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [selectedPhoto, setSelectedPhoto] = useState<Cake | null>(null);
 
   const itemStyle: React.CSSProperties = {
     backgroundColor: "white",
@@ -42,6 +43,7 @@ const CakeItem: React.FC<CakeItemProps> = ({ cake }) => {
     height: "100%",
     objectFit: "cover",
     transition: "transform 0.3s ease-in-out",
+    cursor: "pointer", // Change cursor to pointer to indicate clickability
   };
 
   const contentStyle: React.CSSProperties = {
@@ -66,13 +68,13 @@ const CakeItem: React.FC<CakeItemProps> = ({ cake }) => {
 
   const priceStyle: React.CSSProperties = {
     fontSize: "1.25rem",
-    color: "#e53e3e",
+    color: "#ED5636",
     fontWeight: "bold",
     marginBottom: "1rem",
   };
 
   const buttonStyle: React.CSSProperties = {
-    backgroundColor: "#48bb78",
+    backgroundColor: "#ED8936",
     color: "white",
     border: "none",
     padding: "0.75rem 1rem",
@@ -92,6 +94,42 @@ const CakeItem: React.FC<CakeItemProps> = ({ cake }) => {
     fontSize: "0.875rem",
     marginTop: "0.5rem",
     textAlign: "center",
+  };
+
+  const infoStyle: React.CSSProperties = {
+    color: "#718096",
+    fontSize: "0.875rem",
+    marginBottom: "0.5rem",
+    textAlign: "center",
+  }
+
+  const modalStyle: React.CSSProperties = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 1000,
+  };
+
+  const modalImageStyle: React.CSSProperties = {
+    maxWidth: "90%",
+    maxHeight: "90%",
+    borderRadius: "12px",
+  };
+
+  const closeButtonStyle: React.CSSProperties = {
+    position: "absolute",
+    top: "1rem",
+    right: "1rem",
+    background: "none",
+    border: "none",
+    color: "white",
+    cursor: "pointer",
   };
 
   const handleAddToCart = async () => {
@@ -144,20 +182,22 @@ const CakeItem: React.FC<CakeItemProps> = ({ cake }) => {
           src={`${import.meta.env.VITE_BACKEND_API}/api/cakes/image/${cake.imageId}`}
           alt={cake.name}
           style={imageStyle}
+          onClick={() => setSelectedPhoto(cake)} // Use `cake` here
         />
       </div>
       <div style={contentStyle}>
         <h3 style={nameStyle}>{cake.name}</h3>
         <p style={categoryStyle}>{cake.category}</p>
         <p style={priceStyle}>GHS {cake.price.toFixed(2)}</p>
+        {<p style={infoStyle}>Click image to view</p>}
         <button
           style={buttonStyle}
           onClick={handleAddToCart}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = "#38a169";
+            e.currentTarget.style.backgroundColor = "#db6e14";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = "#48bb78";
+            e.currentTarget.style.backgroundColor = "#ED8936";
           }}
           disabled={loading}
           aria-label={`Add ${cake.name} to cart`}
@@ -171,6 +211,21 @@ const CakeItem: React.FC<CakeItemProps> = ({ cake }) => {
         </button>
         {error && <p style={errorStyle}>{error}</p>}
       </div>
+      {selectedPhoto && (
+        <div style={modalStyle} onClick={() => setSelectedPhoto(null)}>
+          <img
+            src={`${import.meta.env.VITE_BACKEND_API}/api/cakes/image/${selectedPhoto.imageId}`} // Ensure the image URL is correct
+            alt={selectedPhoto.name}
+            style={modalImageStyle}
+          />
+          <button
+            style={closeButtonStyle}
+            onClick={() => setSelectedPhoto(null)}
+          >
+            <X size={24} />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

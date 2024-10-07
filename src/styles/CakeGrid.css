@@ -1,0 +1,32 @@
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .animate-bounce {
+    animation: bounce 1s infinite;
+  }
+  
+  @media (max-width: 768px) {
+    .cake-grid-container {
+      padding: 1rem 0.5rem;
+    }
+  
+    .cake-grid-header {
+      font-size: 1rem;
+    }
+  
+    .cake-grid {
+      gap: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cake-grid-header {
+      font-size: 1.75rem;
+    }
+  
+    .cake-grid {
+      grid-template-columns: 1fr;
+    }
+  }

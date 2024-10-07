@@ -3,6 +3,8 @@ import axios from "axios";
 import CakeItem from "./CakeItem";
 import CakeFilter from "./CakeFilter";
 import { Cake, ShoppingBag } from "lucide-react";
+import Pagination from "./Pagination"; // Import the pagination component
+import '../styles/CakeGrid.css';
 
 interface CakeType {
   _id: string;
@@ -18,6 +20,10 @@ const CakeGrid: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const cakesPerPage = 6; // You can adjust this number based on how many cakes to display per page
 
   useEffect(() => {
     fetchCakes();
@@ -61,6 +67,15 @@ const CakeGrid: React.FC = () => {
     setSearchTerm(searchTerm);
   };
 
+  // Calculate current cakes for the current page
+  const indexOfLastCake = currentPage * cakesPerPage;
+  const indexOfFirstCake = indexOfLastCake - cakesPerPage;
+  const currentCakes = filteredCakes.slice(indexOfFirstCake, indexOfLastCake);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
   const containerStyle: React.CSSProperties = {
     maxWidth: "1200px",
     margin: "0 auto",
@@ -102,7 +117,7 @@ const CakeGrid: React.FC = () => {
 
   return (
     <div style={containerStyle}>
-      <h1 style={headerStyle}>
+      <h1 style={headerStyle} className="cake-grid-header">
         <Cake size={36} style={{ marginRight: "0.5rem" }} />
         Our Delicious Cakes
       </h1>
@@ -112,12 +127,21 @@ const CakeGrid: React.FC = () => {
           <ShoppingBag size={32} className="animate-bounce mr-2" />
           Loading cakes...
         </div>
-      ) : filteredCakes.length > 0 ? (
-        <div style={gridStyle}>
-          {filteredCakes.map((cake) => (
-            <CakeItem key={cake._id} cake={cake} />
-          ))}
-        </div>
+      ) : currentCakes.length > 0 ? (
+        <>
+          <div style={gridStyle}>
+            {currentCakes.map((cake) => (
+              <CakeItem key={cake._id} cake={cake} />
+            ))}
+          </div>
+          {/* Pagination */}
+          <Pagination
+            totalItems={filteredCakes.length}
+            itemsPerPage={cakesPerPage}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        </>
       ) : (
         <p style={noResultsStyle}>No cakes found. Try adjusting your filters.</p>
       )}

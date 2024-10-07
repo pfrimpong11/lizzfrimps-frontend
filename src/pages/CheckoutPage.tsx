@@ -2,17 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { usePaystackPayment } from "react-paystack";
-import {
-  ShoppingBag,
-  User,
-  Phone,
-  Mail,
-  Truck,
-  MapPin,
-  Calendar,
-  CreditCard,
-} from "lucide-react";
+import { ShoppingBag, User, Phone, Mail, Truck, MapPin, Calendar, CreditCard, Pencil } from "lucide-react";
 import "../styles/CheckoutPage.css";
+import BackNavigator from "../components/BackNavigator";
+import backgroundImage from '../assets/images/background.png';
 
 interface Cake {
   _id: string;
@@ -42,6 +35,7 @@ const CheckoutPage: React.FC = () => {
   const [phone, setPhone] = useState<string>("");
   const [deliveryMethod, setDeliveryMethod] = useState<string>("pickup");
   const [location, setLocation] = useState<string>("");
+  const [inscription, setInscription] = useState<string>("");
   const [deliveryDate, setDeliveryDate] = useState<string>("");
 
   useEffect(() => {
@@ -74,7 +68,7 @@ const CheckoutPage: React.FC = () => {
 
   const getMinDate = () => {
     const now = new Date();
-    now.setDate(now.getDate() + 1);
+    now.setDate(now.getDate() + 3);
     return now.toISOString().split("T")[0];
   };
 
@@ -101,6 +95,7 @@ const CheckoutPage: React.FC = () => {
           deliveryMethod,
           location,
           deliveryDate,
+          inscription,
           email,
         },
         {
@@ -155,6 +150,17 @@ const CheckoutPage: React.FC = () => {
 
   // Styles
   const pageStyle: React.CSSProperties = {
+    // display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "100vh",
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    padding: "20px",
+  };
+
+  const formContainerStyle: React.CSSProperties = {
     maxWidth: "800px",
     margin: "0 auto",
     padding: "40px 20px",
@@ -226,7 +232,7 @@ const CheckoutPage: React.FC = () => {
   };
 
   const buttonStyle: React.CSSProperties = {
-    backgroundColor: "#48bb78",
+    backgroundColor: "#ED8936",
     color: "white",
     border: "none",
     padding: "12px 24px",
@@ -246,119 +252,136 @@ const CheckoutPage: React.FC = () => {
   };
 
   return (
-    <div style={pageStyle} className="checkout-container">
-      <h1 style={headerStyle}>
-        <ShoppingBag size={32} style={iconStyle} />
-        Checkout
-      </h1>
-      <form id="paymentForm" onSubmit={handleCheckout} style={formStyle}>
-        <div style={inputGroupStyle}>
-          <label style={labelStyle}>
-            <User size={18} style={iconStyle} />
-            Full Name:
-          </label>
-          <input
-            type="text"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-            required
-            style={inputStyle}
-            className="checkout-input"
-          />
-        </div>
-        <div style={inputGroupStyle}>
-          <label style={labelStyle}>
-            <Phone size={18} style={iconStyle} />
-            Phone Number:
-          </label>
-          <input
-            type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-            style={inputStyle}
-            className="checkout-input"
-          />
-        </div>
-        <div style={inputGroupStyle}>
-          <label style={labelStyle}>
-            <Mail size={18} style={iconStyle} />
-            Email Address:
-          </label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={inputStyle}
-            className="checkout-input"
-          />
-        </div>
-        <div style={inputGroupStyle}>
-          <label style={labelStyle}>
-            <Truck size={18} style={iconStyle} />
-            Delivery Method:
-          </label>
-          <select
-            value={deliveryMethod}
-            onChange={(e) => setDeliveryMethod(e.target.value)}
-            required
-            style={selectStyle}
-            className="checkout-select"
-          >
-            <option value="pickup">Pickup</option>
-            <option value="delivery">Delivery</option>
-          </select>
-        </div>
-        {deliveryMethod === "delivery" && (
+    <div style={pageStyle}>
+      <div style={formContainerStyle} className="checkout-container">
+      <BackNavigator label="Go Back" />
+        <h1 style={headerStyle}>
+          <ShoppingBag size={32} style={iconStyle} />
+          Checkout
+        </h1>
+        <form id="paymentForm" onSubmit={handleCheckout} style={formStyle}>
           <div style={inputGroupStyle}>
             <label style={labelStyle}>
-              <MapPin size={18} style={iconStyle} />
-              Delivery Location:
+              <User size={18} style={iconStyle} />
+              Full Name:
             </label>
             <input
               type="text"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              required={deliveryMethod === "delivery"}
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              required
               style={inputStyle}
               className="checkout-input"
             />
           </div>
-        )}
-        <div style={inputGroupStyle}>
-          <label style={labelStyle}>
-            <Calendar size={18} style={iconStyle} />
-            Preferred Date for Pickup/Delivery:
-          </label>
-          <input
-            type="date"
-            value={deliveryDate}
-            onChange={(e) => setDeliveryDate(e.target.value)}
-            min={getMinDate()}
-            required
-            style={inputStyle}
-            className="checkout-input"
-          />
-        </div>
-        <h2 style={totalPriceStyle}>
-          Total Price: GHS {totalPrice.toFixed(2)}
-        </h2>
-        <button
-          type="submit"
-          style={buttonStyle}
-          className="checkout-button"
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor = "#38a169")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.backgroundColor = "#48bb78")
-          }
-        >
-          <CreditCard size={24} style={iconStyle} />
-          Pay Now
-        </button>
-      </form>
+          <div style={inputGroupStyle}>
+            <label style={labelStyle}>
+              <Phone size={18} style={iconStyle} />
+              Phone Number:
+            </label>
+            <input
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+              style={inputStyle}
+              className="checkout-input"
+            />
+          </div>
+          <div style={inputGroupStyle}>
+            <label style={labelStyle}>
+              <Mail size={18} style={iconStyle} />
+              Email Address:
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              style={inputStyle}
+              className="checkout-input"
+            />
+          </div>
+          <div style={inputGroupStyle}>
+            <label style={labelStyle}>
+              <Truck size={18} style={iconStyle} />
+              Delivery Method:
+            </label>
+            <select
+              value={deliveryMethod}
+              onChange={(e) => setDeliveryMethod(e.target.value)}
+              required
+              style={selectStyle}
+              className="checkout-select"
+            >
+              <option value="pickup">Pickup</option>
+              <option value="delivery">Delivery</option>
+            </select>
+          </div>
+          {deliveryMethod === "delivery" && (
+            <div style={inputGroupStyle}>
+              <label style={labelStyle}>
+                <MapPin size={18} style={iconStyle} />
+                Delivery Location:
+              </label>
+              <input
+                type="text"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                required={deliveryMethod === "delivery"}
+                style={inputStyle}
+                className="checkout-input"
+              />
+            </div>
+          )}
+          <div style={inputGroupStyle}>
+            <label style={labelStyle}>
+              <Pencil size={18} style={iconStyle} />
+              Cake Inscription:
+            </label>
+            <input
+              type="text"
+              value={inscription}
+              onChange={(e) => setInscription(e.target.value)}
+              placeholder="eg. Happy Birthday My Love"
+              style={inputStyle}
+              className="checkout-input"
+            />
+          </div>
+          <div style={inputGroupStyle}>
+            <label style={labelStyle}>
+              <Calendar size={18} style={iconStyle} />
+              Preferred Date for Pickup/Delivery:
+            </label>
+            <input
+              type="date"
+              value={deliveryDate}
+              onChange={(e) => setDeliveryDate(e.target.value)}
+              min={getMinDate()}
+              required
+              style={inputStyle}
+              className="checkout-input"
+            />
+          </div>
+          <h2 style={totalPriceStyle}>
+            Total Price: GHS {totalPrice.toFixed(2)}
+          </h2>
+          <button
+            type="submit"
+            style={buttonStyle}
+            className="checkout-button"
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor = "#db6e14")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "#ED8936")
+            }
+          >
+            <CreditCard size={24} style={iconStyle} />
+            Pay Now
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
