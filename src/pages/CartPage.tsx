@@ -42,7 +42,7 @@ const CartPage: React.FC = () => {
         );
         setCartItems(response.data.items);
       } catch (err) {
-        setError("Error fetching cart items.");
+        setError("Error fetching cart items. Please login again");
         console.error(err);
       } finally {
         setLoading(false);
@@ -82,7 +82,7 @@ const CartPage: React.FC = () => {
   const pageStyle: React.CSSProperties = {
     // maxWidth: "1200px",
     margin: "0 auto",
-    padding: "80px 30px",
+    padding: "40px 30px",
     fontFamily: "Arial, sans-serif",
     color: "#333",
     backgroundColor: "#f7f7f7",

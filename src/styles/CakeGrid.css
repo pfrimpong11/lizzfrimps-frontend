@@ -14,6 +14,8 @@
   
     .cake-grid-header {
       font-size: 1rem;
+      flex-direction: column;
+      text-align: center;
     }
   
     .cake-grid {
@@ -23,7 +25,8 @@
   
   @media (max-width: 480px) {
     .cake-grid-header {
-      font-size: 1.75rem;
+      font-size: 1rem;
+      flex-direction: column;
     }
   
     .cake-grid {

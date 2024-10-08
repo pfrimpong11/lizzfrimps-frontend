@@ -1,0 +1,60 @@
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.contact-content {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.contact-input {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-input:focus {
+  border-color: #ED8936;
+  box-shadow: 0 0 0 2px rgba(237, 137, 54, 0.2);
+}
+
+.contact-button {
+  transition: all 0.3s ease;
+}
+
+.contact-button:hover {
+  background-color: #DD6B20;
+  transform: translateY(-2px);
+}
+
+.contact-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .contact-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-content > * {
+    width: 100%;
+  }
+  .map-info-container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .contact-input,
+  .contact-button {
+    font-size: 14px;
+  }
+  .map-info-container {
+    flex-direction: column;
+  }
+}
