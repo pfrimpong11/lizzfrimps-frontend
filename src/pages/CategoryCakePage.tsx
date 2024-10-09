@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CakeItem from "../components/CakeItem";
 import Header from "../components/Header";
+import BackNavigator from "../components/BackNavigator";
 import { useParams } from "react-router-dom";
 import { Cake, Loader } from "lucide-react";
 
@@ -91,6 +92,7 @@ const CategoryCakePage: React.FC = () => {
     <div>
         <Header/>
         <div style={pageStyle}>
+          <BackNavigator />
         <header style={headerStyle}>
             <Cake size={48} color="#ED8936" />
             <h1 style={titleStyle}>{category.charAt(0).toUpperCase() + category.slice(1)} Cakes</h1>

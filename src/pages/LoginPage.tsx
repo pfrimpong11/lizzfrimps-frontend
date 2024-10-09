@@ -41,7 +41,7 @@ const LoginPage: React.FC = () => {
       sessionStorage.setItem("token", token);
       sessionStorage.setItem("isLoggedIn", "true");
 
-      console.log("Login successful:", response.data);
+      console.log("Login successful");
       navigate("/");
     } catch (error: any) {
       if (error.response && error.response.data && error.response.data.msg) {

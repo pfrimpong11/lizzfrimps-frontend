@@ -82,7 +82,6 @@ const CheckoutPage: React.FC = () => {
   };
 
   const onSuccess = async (reference: any) => {
-    console.log(reference);
     alert("Payment successful! Reference: " + reference.reference);
 
     try {

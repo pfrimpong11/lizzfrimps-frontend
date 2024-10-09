@@ -63,7 +63,6 @@ const CartPage: React.FC = () => {
           data: { itemId },
         }
       );
-      console.log(response);
       setCartItems(response.data.items);
     } catch (err) {
       console.error("Error removing item from cart", err);

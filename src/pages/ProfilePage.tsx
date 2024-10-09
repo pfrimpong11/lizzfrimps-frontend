@@ -51,7 +51,6 @@ const ProfilePage: React.FC = () => {
         );
         setProfile(response.data.userProfile);
         setOrderHistory(response.data.orderHistory);
-        console.log(response.data.orderHistory);
       } catch (error) {
         console.error("Error fetching profile and order history", error);
       } finally {

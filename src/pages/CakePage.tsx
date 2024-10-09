@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
+import CakeHeader from "../components/CakeHeader";
 import CakeGrid from "../components/CakeGrid";
 import "../styles/CakePage.css";
 
@@ -13,6 +14,7 @@ const CakePage: React.FC = () => {
   return (
     <div>
       <Header />
+      <CakeHeader/>
       <main style={pageStyle}>
         <CakeGrid />
         <br />

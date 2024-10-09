@@ -36,7 +36,6 @@ const ContactPage: React.FC = () => {
         }
       );
 
-      console.log(response.data);
       navigate("/");
     } catch (error: any) {
       console.error("There was an error: ", error);

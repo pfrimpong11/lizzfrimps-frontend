@@ -23,12 +23,6 @@ import OrderSuccessPage from "./pages/OrderSuccessPage";
 import CategoryCakePage from "./pages/CategoryCakePage";
 
 
-import AdminUploadPage from "./pages/AdminUploadPage";
-import AdminDeletePage from "./pages/AdminDeletePage";
-import AdminViewPage from "./pages/AdminViewPage";
-import EditCake from "./pages/EditCake";
-
-
 
 
 const AppRoutes: React.FC = () => {
@@ -55,12 +49,6 @@ const AppRoutes: React.FC = () => {
       <Route path="/ProfilePage" element={<ProfilePage />} />
       <Route path="/OrderSuccessPage" element={<OrderSuccessPage />} />
       <Route path="/:category" element={<CategoryCakePage />} />
-
-
-      {/* <Route path="/" element={<AdminUploadPage/>} />
-      <Route path="/AdminDeletePage" element={<AdminDeletePage/>} />
-      <Route path="/AdminViewPage" element={<AdminViewPage/>} />
-      <Route path="/EditCake" element={<EditCake/>} /> */}
     </Routes>
   );
 };

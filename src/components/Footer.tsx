@@ -1,5 +1,6 @@
 import React from "react";
 import { Facebook, Instagram, Twitter, Cake } from "lucide-react";
+import WhatsApp from '../assets/images/whatsapp.png';
 // import '../styles/Footer.css';
 
 const Footer: React.FC = () => {
@@ -172,6 +173,9 @@ const Footer: React.FC = () => {
               </a>
               <a href="https://x.com/lizzfrimps" aria-label="Twitter">
                 <Twitter style={iconStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#1da1f2'; e.currentTarget.style.transform = 'scale(1.1)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'scale(1)'; }} />
+              </a>
+              <a href="https://wa.me/233546640201" aria-label="Twitter">
+                <img src={WhatsApp} style={iconStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#1da1f2'; e.currentTarget.style.transform = 'scale(1.1)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'scale(1)'; }} />
               </a>
             </div>
           </div>
