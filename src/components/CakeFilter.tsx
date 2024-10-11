@@ -17,7 +17,7 @@ interface Cake {
 }
 
 const CakeFilter: React.FC<CakeFilterProps> = ({ onFilterChange, onSearchChange }) => {
-  const [cakes, setCakes] = useState<Cake[]>([]);
+  // const [cakes, setCakes] = useState<Cake[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const CakeFilter: React.FC<CakeFilterProps> = ({ onFilterChange, onSearchChange 
   const fetchCakes = async () => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_BACKEND_API}/api/cakes`);
-      setCakes(response.data);
+      // setCakes(response.data);
 
       const uniqueCategories = Array.from(new Set(response.data.map((cake: Cake) => cake.category))) as string[];
       setCategories(uniqueCategories);

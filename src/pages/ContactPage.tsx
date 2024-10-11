@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BackNavigator from '../components/BackNavigator';
 import { MapPin, Clock, Phone, Mail, Send } from 'lucide-react';
-import backgroundImage from '../assets/images/background.png';
 import '../styles/ContactPage.css';
 
 const ContactPage: React.FC = () => {
@@ -35,7 +34,7 @@ const ContactPage: React.FC = () => {
           },
         }
       );
-
+      console.log(response);
       navigate("/");
     } catch (error: any) {
       console.error("There was an error: ", error);

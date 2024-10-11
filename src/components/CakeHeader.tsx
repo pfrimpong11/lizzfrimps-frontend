@@ -27,13 +27,6 @@ const CakeHeader: React.FC = () => {
     zIndex: 2,
   };
 
-  const titleStyle: React.CSSProperties = {
-    fontSize: "3rem",
-    fontWeight: "bold",
-    marginBottom: "1rem",
-    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.1)",
-  };
-
   const subtitleStyle: React.CSSProperties = {
     fontSize: "1.2rem",
     maxWidth: "800px",

@@ -70,14 +70,6 @@ const Testimonials: React.FC = () => {
     marginTop: '1rem',
   };
 
-  const authorImageStyle: React.CSSProperties = {
-    width: '50px',
-    height: '50px',
-    borderRadius: '50%',
-    marginRight: '1rem',
-    objectFit: 'cover',
-  };
-
   const authorNameStyle: React.CSSProperties = {
     fontSize: '1rem',
     fontWeight: '600',

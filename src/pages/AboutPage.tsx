@@ -53,36 +53,6 @@ const AboutPage: React.FC = () => {
     marginBottom: '20px',
   };
 
-  const teamContainerStyle: React.CSSProperties = {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: '20px',
-  };
-
-  const teamMemberStyle: React.CSSProperties = {
-    textAlign: 'center',
-    maxWidth: '200px',
-  };
-
-  const teamMemberImageStyle: React.CSSProperties = {
-    width: '150px',
-    height: '150px',
-    borderRadius: '50%',
-    objectFit: 'cover',
-    marginBottom: '10px',
-  };
-
-  const teamMemberNameStyle: React.CSSProperties = {
-    fontSize: '18px',
-    fontWeight: 'bold',
-    marginBottom: '5px',
-  };
-
-  const teamMemberRoleStyle: React.CSSProperties = {
-    fontSize: '14px',
-    color: '#718096',
-  };
 
   return (
     <div style={pageStyle}>
