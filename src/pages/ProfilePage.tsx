@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { User, Phone, Mail, ShoppingBag, Truck, MapPin, Calendar, Loader2 } from "lucide-react";
+import { User, Phone, Mail, ShoppingBag, Truck, MapPin, Calendar, Loader2, CheckCircle, Loader } from "lucide-react";
 import BackNavigator from "../components/BackNavigator";
 import "../styles/ProfilePage.css";
 
@@ -19,6 +19,7 @@ interface Order {
   deliveryMethod: string;
   location: string;
   deliveryDate: string;
+  status: string;
   items: {
     cakeId: {
       name: string;
@@ -257,6 +258,17 @@ const ProfilePage: React.FC = () => {
                     Date:
                   </span>
                   {new Date(order.deliveryDate).toLocaleDateString()}
+                </p>
+                <p style={orderDetailStyle}>
+                  <span style={labelStyle}>
+                    {order.status === "Delivered" ? (
+                      <CheckCircle size={16} style={iconStyle} />
+                    ) : (
+                      <Loader size={16} style={iconStyle} />
+                    )}
+                    Status:
+                  </span>
+                  {order.status}
                 </p>
               </li>
             ))}
