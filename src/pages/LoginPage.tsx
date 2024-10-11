@@ -146,6 +146,7 @@ const LoginPage: React.FC = () => {
     textDecoration: "none",
     fontWeight: "bold",
     transition: "color 0.3s ease",
+    cursor: "pointer",
   };
 
   return (
@@ -217,13 +218,13 @@ const LoginPage: React.FC = () => {
           </button>
         </form>
         <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <a href="/ForgotPasswordPage" style={linkStyle} className="login-link">
+          <a onClick={() => navigate("/ForgotPasswordPage")} style={linkStyle} className="login-link">
             Forgot Password?
           </a>
         </div>
         <p style={{ textAlign: "center", marginTop: "20px" }}>
           Don't have an account?{" "}
-          <a href="/RegisterPage" style={linkStyle} className="login-link">
+          <a onClick={() => navigate("/RegisterPage")} style={linkStyle} className="login-link">
             Register
           </a>
         </p>

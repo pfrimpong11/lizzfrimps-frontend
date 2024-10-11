@@ -122,6 +122,7 @@ const Header: React.FC = () => {
     transition: "color 0.2s ease",
     textDecoration: "none",
     padding: "0.5rem 0",
+    cursor: "pointer",
   };
 
   const activeNavLinkStyle: React.CSSProperties = {
@@ -178,19 +179,19 @@ const Header: React.FC = () => {
         </div>
         <div style={navContainerStyle}>
           <nav style={navStyle}>
-            <a href="/" style={activeNavLinkStyle}>
+            <a onClick={() => navigate("/")} style={activeNavLinkStyle}>
               Home
             </a>
-            <a href="/CakePage" style={navLinkStyle}>
+            <a onClick={() => navigate("/CakePage")} style={navLinkStyle}>
               Cakes
             </a>
-            <a href="/" style={navLinkStyle}>
+            <a onClick={() => navigate("/")} style={navLinkStyle}>
               Supplies
             </a>
-            <a href="/AboutPage" style={navLinkStyle}>
+            <a onClick={() => navigate("/AboutPage")} style={navLinkStyle}>
               About
             </a>
-            <a href="/ContactPage" style={navLinkStyle}>
+            <a onClick={() => navigate("/ContactPage")} style={navLinkStyle}>
               Contact
             </a>
           </nav>
@@ -241,19 +242,19 @@ const Header: React.FC = () => {
         </div>
       </div>
       <nav style={mobileNavStyle}>
-        <a href="/" style={activeNavLinkStyle}>
+        <a onClick={() => navigate("/")} style={activeNavLinkStyle}>
           Home
         </a>
-        <a href="/CakePage" style={navLinkStyle}>
+        <a onClick={() => navigate("/CakePage")} style={navLinkStyle}>
           Cakes
         </a>
-        <a href="/" style={navLinkStyle}>
+        <a onClick={() => navigate("/")} style={navLinkStyle}>
           Supplies
         </a>
-        <a href="/AboutPage" style={navLinkStyle}>
+        <a onClick={() => navigate("/AboutPage")} style={navLinkStyle}>
           About
         </a>
-        <a href="/ContactPage" style={navLinkStyle}>
+        <a onClick={() => navigate("/ContactPage")} style={navLinkStyle}>
           Contact
         </a>
         {/* Conditional Rendering for mobile menu based on login status */}

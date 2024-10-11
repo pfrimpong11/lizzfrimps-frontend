@@ -173,6 +173,7 @@ const RegisterPage: React.FC = () => {
     textDecoration: "none",
     fontWeight: "bold",
     transition: "color 0.3s ease",
+    cursor: "pointer",
   };
 
   return (
@@ -317,7 +318,7 @@ const RegisterPage: React.FC = () => {
           </button>
         </form>
         <p style={{ textAlign: "center", marginTop: "20px" }}>
-          Already have an account? <a href="/LoginPage" style={linkStyle} className="register-link">Sign in</a>
+          Already have an account? <a onClick={() => navigate("/LoginPage")} style={linkStyle} className="register-link">Sign in</a>
         </p>
       </div>
     </div>

@@ -160,6 +160,7 @@ const ForgotPasswordPage: React.FC = () => {
     textDecoration: "none",
     fontWeight: "bold",
     transition: "color 0.3s ease",
+    cursor: "pointer",
   };
 
   return (
@@ -204,10 +205,10 @@ const ForgotPasswordPage: React.FC = () => {
           </button>
         </form>
         <p style={{ textAlign: "center", marginTop: "20px" }}>
-          Remembered your password? <a href="/LoginPage" style={linkStyle} className="forgot-password-link">Sign in</a>
+          Remembered your password? <a onClick={() => navigate("/LoginPage")} style={linkStyle} className="forgot-password-link">Sign in</a>
         </p>
         <p style={{ textAlign: "center", marginTop: "10px" }}>
-          Don't have an account? <a href="/RegisterPage" style={linkStyle} className="forgot-password-link">Register</a>
+          Don't have an account? <a onClick={() => navigate("/RegisterPage")} style={linkStyle} className="forgot-password-link">Register</a>
         </p>
       </div>
     </div>

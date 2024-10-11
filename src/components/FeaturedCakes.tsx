@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Star, ChevronRight } from 'lucide-react';
 import ChocolateCake from '../assets/images/chocolate-cake.png';
 import StrawberryCake from '../assets/images/strawberry-cake.png';
@@ -14,6 +15,8 @@ interface Product {
 }
 
 const FeaturedCakes: React.FC = () => {
+  const navigate = useNavigate();
+
   const products: Product[] = [
     { id: '1', name: 'Chocolate Delight', image: ChocolateCake, price: 39.99, rating: 4.8 },
     { id: '2', name: 'Strawberry Dream', image: StrawberryCake, price: 34.99, rating: 4.7 },
@@ -51,6 +54,7 @@ const FeaturedCakes: React.FC = () => {
     fontSize: '1rem',
     textDecoration: 'none',
     transition: 'color 0.3s ease',
+    cursor: "pointer",
   };
 
   const gridStyle: React.CSSProperties = {
@@ -101,7 +105,7 @@ const FeaturedCakes: React.FC = () => {
       <div style={containerStyle}>
         <header style={headerStyle}>
           <h2 style={titleStyle}>Featured Products</h2>
-          <a href="/CakePage" style={viewAllStyle} className="view-all-link">
+          <a onClick={() => navigate("/CakePage")} style={viewAllStyle} className="view-all-link">
             View All <ChevronRight size={20} style={{ marginLeft: '0.5rem' }} />
           </a>
         </header>

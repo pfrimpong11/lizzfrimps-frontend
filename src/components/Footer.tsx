@@ -1,10 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Cake } from "lucide-react";
 import WhatsApp from '../assets/images/whatsapp.png';
 // import '../styles/Footer.css';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const navigate = useNavigate();
 
   const footerStyle: React.CSSProperties = {
     borderTop: '2px solid #e2e8f0',
@@ -53,6 +55,7 @@ const Footer: React.FC = () => {
     fontSize: '0.875rem',
     transition: 'color 0.2s ease, transform 0.2s ease',
     display: 'inline-block',
+    cursor: "pointer",
   };
 
   const socialIconsStyle: React.CSSProperties = {
@@ -111,17 +114,17 @@ const Footer: React.FC = () => {
             <h3 style={headingStyle}>About Us</h3>
             <ul style={listStyle}>
               <li style={listItemStyle}>
-                <a href="/OurStoryPage" style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                <a onClick={() => navigate("/OurStoryPage")} style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                   Our Story
                 </a>
               </li>
               {/* <li style={listItemStyle}>
-                <a href="/CareersPage" style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                <a onClick={() => navigate("/CareersPage")} style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                   Careers
                 </a>
               </li> */}
               {/* <li style={listItemStyle}>
-                <a href="/AnnouncementsPage" style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                <a onClick={() => navigate("/AnnouncementsPage")} style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                   Announcements
                 </a>
               </li> */}
@@ -131,12 +134,12 @@ const Footer: React.FC = () => {
             <h3 style={headingStyle}>Customer Service</h3>
             <ul style={listStyle}>
               <li style={listItemStyle}>
-                <a href="/ContactPage" style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                <a onClick={() => navigate("/ContactPage")} style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                   Contact Us
                 </a>
               </li>
               <li style={listItemStyle}>
-                <a href="/FAQsPage" style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                <a onClick={() => navigate("/FAQsPage")} style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                   FAQs
                 </a>
               </li>
@@ -146,17 +149,17 @@ const Footer: React.FC = () => {
             <h3 style={headingStyle}>Our Policies</h3>
             <ul style={listStyle}>
               <li style={listItemStyle}>
-                <a href="/PrivacyPolicyPage" style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                <a onClick={() => navigate("/PrivacyPolicyPage")} style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                   Privacy Policy
                 </a>
               </li>
               <li style={listItemStyle}>
-                <a href="/TermsOfServicePage" style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                <a onClick={() => navigate("/TermsOfServicePage")} style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                   Terms of Service
                 </a>
               </li>
               <li style={listItemStyle}>
-                <a href="/CookiePolicyPage" style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                <a onClick={() => navigate("/CookiePolicyPage")} style={linkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = '#2d3748'; e.currentTarget.style.transform = 'translateX(5px)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = '#718096'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                   Cookie Policy
                 </a>
               </li>
