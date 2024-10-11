@@ -237,7 +237,7 @@ const ContactPage: React.FC = () => {
             <Mail size={24} style={infoIconStyle} />
             <div>
               <h2 style={infoTitleStyle}>Email Us</h2>
-              <p>Email: info@lizzfrimpscakes.com</p>
+              <p>Email: lizzfrimpservices27@gmail.com</p>
             </div>
           </div>
           <div style={mapInfoContainer} className='map-info-container'>

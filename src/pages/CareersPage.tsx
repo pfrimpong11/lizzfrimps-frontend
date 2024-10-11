@@ -185,7 +185,7 @@ const CareersPage: React.FC = () => {
       <section style={sectionStyle}>
         <h2 style={sectionTitleStyle}>How to Apply</h2>
         <p style={paragraphStyle}>
-          To apply for any of our open positions, please send your resume and a cover letter to careers@lizzfrimpscakes.com. Be sure to include the position you're applying for in the subject line of your email.
+          To apply for any of our open positions, please send your resume and a cover letter to lizzfrimpservices27@gmail.com. Be sure to include the position you're applying for in the subject line of your email.
         </p>
         <p style={paragraphStyle}>
           We look forward to hearing from you and potentially welcoming you to the Lizzfrimps Cakes Empire family!

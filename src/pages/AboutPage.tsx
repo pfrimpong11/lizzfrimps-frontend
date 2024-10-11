@@ -110,7 +110,7 @@ const AboutPage: React.FC = () => {
           <strong>Address:</strong> 7th Adote Obour st<br />
           <strong>Hours:</strong> Monday - Saturday: 9:00 AM - 6:00 PM<br />
           <strong>Phone:</strong> +233 (054) 664-0201<br />
-          <strong>Email:</strong> info@lizzfrimpscakes.com
+          <strong>Email:</strong> lizzfrimpservices27@gmail.com
         </p>
       </section>
     </div>

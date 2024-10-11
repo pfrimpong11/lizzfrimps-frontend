@@ -198,7 +198,7 @@ const AnnouncementsPage: React.FC = () => {
           For media inquiries, please contact our press team:
         </p>
         <p style={announcementContentStyle}>
-          Email: press@lizzfrimpscakes.com<br />
+          Email: lizzfrimpservices27@gmail.com<br />
           Phone: +233 (054) 664-0201
         </p>
       </section>

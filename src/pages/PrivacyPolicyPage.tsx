@@ -129,7 +129,7 @@ const PrivacyPolicyPage: React.FC = () => {
         <p style={paragraphStyle}>
           Lizzfrimps Cakes Empire<br />
           7th Adote Obour st<br />
-          Email: privacy@lizzfrimpscakes.com<br />
+          Email: lizzfrimpservices27@gmail.com<br />
           Phone: +233 (054) 664-0201
         </p>
       </section>
